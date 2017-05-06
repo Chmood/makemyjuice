@@ -6,7 +6,7 @@
         <i>menu</i>
       </button>
       <q-toolbar-title :padding="1">
-        Quasu
+        MakeMyJuice
         <!-- <img src="~assets/quasar-logo.png" alt="Quasar logo" class="topbar-logo"> -->
       </q-toolbar-title>
       <span v-if="isOnline"><i>wifi</i> ONLINE</span>
@@ -42,6 +42,10 @@
           Messages
           <span class="floating label bg-primary">{{ nMessagesUnread }}</span>
         </q-drawer-link>
+        <q-drawer-link icon="shopping_cart" to="/ingredients">
+          Ingredients
+          <!-- <span class="floating label bg-primary">{{ nMessagesUnread }}</span> -->
+        </q-drawer-link>
         <q-drawer-link icon="build" to="/bar">
           Tools
         </q-drawer-link>
@@ -62,11 +66,11 @@
 
       <div class="layout-padding">
 
-        <ul class="breadcrumb">
+        <!-- <ul class="breadcrumb">
           <li> <a> <i>home</i> </a> </li>
           <li> <a> <i>mail</i> Quasar </a> </li>
           <li> <a> <i>cloud</i> Breadcrumb </a> </li>
-        </ul>
+        </ul> -->
 
         <!-- ROUTER VIEW (SECONDARY) -->
         <transition name="slide">

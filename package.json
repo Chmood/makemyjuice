@@ -18,6 +18,7 @@
     "quasar-framework": "^0.13.6",
     "roboto-fontface": "^0.7.0",
     "vue": "^2.3.2",
+    "vue-i18n": "^6.1.1",
     "vue-online": "^1.1.9",
     "vue-router": "^2.5.3",
     "vuex": "^2.3.0",

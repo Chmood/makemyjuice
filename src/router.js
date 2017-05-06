@@ -33,6 +33,10 @@ export default new VueRouter({
         {
           path: 'messages',
           component: load('Messages')
+        },
+        {
+          path: 'ingredients',
+          component: load('Ingredients')
         }
       ]
     },

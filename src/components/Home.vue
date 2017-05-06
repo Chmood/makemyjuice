@@ -1,7 +1,11 @@
 <template>
   <div class="">
 
-    <h2 class="page-title">Quasu Starter App</h2>
+    <h2 class="page-title">Calculator</h2>
+
+    <p>{{ $t("quantity") }}</p>
+
+    <hr>
 
     <h3 class="page-subtitle">Unread messages ({{ nMessagesUnread }})</h3>
 

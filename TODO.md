@@ -4,15 +4,25 @@
 
   * language chooser
   * split language file
+  * translate ALL UI text
 
-* Server side rendering (for SEO!)
+* Formula
+
+  * rounding function (to get rid of JS rounding errors)
+  * use our bases ingredients to achieve the mix
+  * add nicotine computation
 
 * UI
 
-  * format numbers (rounding mostly)
+  * beaker drawing
+  * format numbers (mostly rounding, to avoid jerk in 2-way inputs)
   * mousewheel handling
   * sliders components for PG/VG ratios
 
+* Misc
+
+  * settings sub-store + page
+  * Server side rendering (for SEO!)
 
 ### CONFIGURATION
 

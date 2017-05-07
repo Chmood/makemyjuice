@@ -35,6 +35,7 @@
 
     <h3 class="page-subtitle">{{ $tc("ingredient", 2) }}</h3>
 
+    <RecipeResults></RecipeResults>
 
   </div>
 </template>
@@ -42,10 +43,12 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import RecipeIngredients from './RecipeIngredients.vue'
+import RecipeResults from './RecipeResults.vue'
 
 export default {
   components: {
-    RecipeIngredients
+    RecipeIngredients,
+    RecipeResults
   },
   data () {
     return {

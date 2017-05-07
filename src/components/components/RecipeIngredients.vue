@@ -94,9 +94,6 @@
         if (this.recipeIngredients.length === 0) {
           return 0
         }
-        else if (this.recipeIngredients.length === 1) {
-          return this.recipeIngredients[0].ratio
-        }
         // TODO: spawns NaN - WTF is going on?!
         // const sum = this.recipeIngredients.reduce(function (a, b) {
         //   return a.ratio + b.ratio

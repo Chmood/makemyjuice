@@ -17,13 +17,23 @@
         :options="ingredientChoice"
       ></q-select>
 
-      <input :value="ingredient.ratio" @input="setRecipeIngredientRatio(index, $event)">%
+      <input :value="ingredient.ratio * 100" @input="setRecipeIngredientRatio(index, $event)">%
 
       <button class="light" @click="deleteRecipeIngredient(ingredient)">
         <span v-if="type === 'aroma'">{{ $tc("deleteAroma", 1) }}</span>
         <span v-if="type === 'additive'">{{ $tc("deleteAdditive", 1) }}</span>
       </button>
 
+    </article>
+
+    <article>
+      <span>
+        {{ recipeIngredients.length }}
+        {{ $tc(type, recipeIngredients.length) }}
+      </span>
+      <span>
+        {{ Math.round(ingredientsRatioSum * 100) }}%
+      </span>
     </article>
 
     <button class="primary" @click="addRecipeIngredient()">
@@ -79,6 +89,23 @@
           return ingredient
         })
         return unusedIngredients
+      },
+      ingredientsRatioSum () {
+        if (this.recipeIngredients.length === 0) {
+          return 0
+        }
+        else if (this.recipeIngredients.length === 1) {
+          return this.recipeIngredients[0].ratio
+        }
+        // TODO: spawns NaN - WTF is going on?!
+        // const sum = this.recipeIngredients.reduce(function (a, b) {
+        //   return a.ratio + b.ratio
+        // })
+        let sum = 0
+        this.recipeIngredients.forEach(function (ingredient) {
+          sum += ingredient.ratio
+        })
+        return sum
       }
     },
 
@@ -90,7 +117,7 @@
       addRecipeIngredient () {
         this.$store.commit('ADD_RECIPE_INGREDIENT', {
           type: this.type,
-          ingredient: {id: 0, ratio: 0.05}
+          ingredient: {id: '0', ratio: 0.05}
         })
       },
       deleteRecipeIngredient (ingredient) {
@@ -110,7 +137,7 @@
         this.$store.commit('SET_RECIPE_INGREDIENT_RATIO', {
           type: this.type,
           id: id,
-          ingredientRatio: e.target.value
+          ingredientRatio: parseFloat(e.target.value) / 100
         })
       }
     }

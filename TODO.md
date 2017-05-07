@@ -3,6 +3,12 @@
 * language chooser
 * Server side rendering (for SEO!)
 
+* UI
+
+  * format numbers (rounding mostly)
+  * mousewheel handling
+  * sliders components for PG/VG ratios
+
 
 ### CONFIGURATION
 

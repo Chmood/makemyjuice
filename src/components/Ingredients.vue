@@ -25,7 +25,7 @@
       </q-tab>
     </q-tabs>
 
-    <h3>{{ $tc("base", 2) }} ({{ this.bases.length }})</h3>
+    <h3>{{ $tc("base", 2) }} ({{ bases.length }})</h3>
 
     <div class="ingredients--bases">
       <ingredient
@@ -41,7 +41,7 @@
       NEW BASE
     </button>
 
-    <h3>{{ $tc("aroma", 2) }} ({{ this.aromas.length }})</h3>
+    <h3>{{ $tc("aroma", 2) }} ({{ aromas.length }})</h3>
 
     <ingredient
       v-if="aromas"
@@ -55,7 +55,7 @@
       NEW AROMA
     </button>
 
-    <h3>{{ $tc("additive", 2) }} ({{ this.additives.length }})</h3>
+    <h3>{{ $tc("additive", 2) }} ({{ additives.length }})</h3>
 
     <ingredient
       v-if="additives"
@@ -69,22 +69,6 @@
       NEW ADDITIVE
     </button>
 
-    <!-- <div class="margin-bottom">
-      <button class="tertiary" @click="fetchMessages()"><i>replay</i>Refresh</button>
-
-      <button class="primary" @click="TOGGLE_ALL_MESSAGES({ read: !allChecked })">
-        <i>book</i>
-        <span v-if="allChecked">Mark all as unread</span>
-        <span v-else>Mark all as read</span>
-      </button>
-    </div> -->
-
-    <!-- <q-search class="messages__search margin-bottom light text-dark"
-    :debounce="600"
-    placeholder="Rechercher dans les messages"
-    icon="search"
-    ></q-search> -->
-
   </section>
 </template>
 
@@ -95,8 +79,8 @@
 
   const filters = {
     all: messages => messages,
-    inactive: messages => messages.filter(message => !message.active),
-    active: messages => messages.filter(message => message.active)
+    active: messages => messages.filter(message => message.active),
+    inactive: messages => messages.filter(message => !message.active)
   }
 
   const typeFilters = {
@@ -133,23 +117,15 @@
       },
       filteredIngredients () {
         return filters[this.visibility](this.getIngredients)
-      } /* ,
-      nIngredientsTotal () {
-        return this.ingredients.length
-      } */
+      }
     },
 
     methods: {
       ...mapActions([
-        // 'fetchMessages'
       ]),
       ...mapMutations([
         'TOGGLE_ALL_INGREDIENTS'
       ])
-    },
-    filters: {
-      pluralize: (n, w) => n === 1 ? w : (w + 's'),
-      capitalize: s => s.charAt(0).toUpperCase() + s.slice(1)
     },
     mounted () {
       // Set custom visibility filter

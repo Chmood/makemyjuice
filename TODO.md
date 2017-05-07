@@ -1,5 +1,6 @@
 ### FEATURES
 
+* language chooser
 * Server side rendering (for SEO!)
 
 
@@ -8,18 +9,21 @@
 * Language
 
 * No nicotine mode
+* Base mode (no aromas - no additives too?)
+* Price mode
 * Use drops for small quantities
 * Draw the beaker
-* Price mode
 
+* prefered PG/VG ratio
+* prefered nicotine
 
 ### INPUT PARAMS
 
 #### WANTED
 
   * Quantity (in mL)
-  * Nicotine (in mg/mL)
   * PG/VG ratio (ratio)
+  * Nicotine (in mg/mL)
   * Aromas & additives [ID | ratio]
 
 #### INGREDIENTS

@@ -36,27 +36,27 @@
       <div class="list no-border platform-delimiter">
         <div class="list-label">MENU</div>
         <q-drawer-link icon="home" to="/">
-          Home
+          Calculator
         </q-drawer-link>
-        <q-drawer-link icon="mail" to="/messages">
+        <!-- <q-drawer-link icon="mail" to="/messages">
           Messages
           <span class="floating label bg-primary">{{ nMessagesUnread }}</span>
-        </q-drawer-link>
+        </q-drawer-link> -->
         <q-drawer-link icon="shopping_cart" to="/ingredients">
           Ingredients
           <!-- <span class="floating label bg-primary">{{ nMessagesUnread }}</span> -->
         </q-drawer-link>
         <q-drawer-link icon="build" to="/bar">
-          Tools
+          Settings
         </q-drawer-link>
-        <hr>
+        <!-- <hr>
         <q-drawer-link icon="account_box" to="/profile" exact>
           Profile
         </q-drawer-link>
         <div class="item item-link" @click="confirmLogout">
           <i class="item-primary">lock</i>
           <div class="item-content">Log out</div>
-        </div>
+        </div> -->
       </div>
     </q-drawer>
 
@@ -109,7 +109,7 @@
     <!-- FOOTER -->
     <div slot="footer" class="toolbar">
       <div class="auto flex justify-center within-iframe-hide">
-        Quasu Starter App - Made with ❤ by&nbsp;<a href="http://www.webcd.fr/">Webcd</a>
+        MakeMyJuice - Made with ❤ by&nbsp;<a href="https://twitter.com/nicolasgiethlen">Nicolas Giethlen</a>
       </div>
       <q-toolbar-title :padding="0" class="within-iframe-only">
         Footer in iframe

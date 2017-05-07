@@ -7,7 +7,9 @@ const state = {
     {id: '1', active: true, type: 'base', name: 'Base 20mg PG50% VG50%', description: 'Half-half, strong nicotine', price: 10, viscosity: 15, PGVGRatio: 0.5, nicotine: 20},
     {id: '2', active: true, type: 'aroma', name: 'Lemon', description: 'Very mild italian lime', price: 100, viscosity: 25, PGVGRatio: 1.0},
     {id: '3', active: true, type: 'aroma', name: 'Vanilla', description: 'My favourite custard aroma', price: 100, viscosity: 25, PGVGRatio: 1.0},
-    {id: '4', active: true, type: 'additive', name: 'Water', description: 'Pure water', price: 0, viscosity: 35}
+    {id: '5', active: true, type: 'aroma', name: 'Mint', description: 'Just a fresh mint!', price: 100, viscosity: 25, PGVGRatio: 1.0},
+    {id: '4', active: true, type: 'additive', name: 'Water', description: 'Pure water', price: 0, viscosity: 35},
+    {id: '6', active: true, type: 'additive', name: 'Alcohol', description: 'Non-modified 90° alcohol', price: 0, viscosity: 35}
   ]
 }
 
@@ -31,7 +33,16 @@ const mutations = {
 
 // Getters
 const getters = {
-  getIngredients: state => state.ingredients
+  getIngredients: state => state.ingredients,
+  getBases: state => state.ingredients.filter(
+    ingredient => ingredient.type === 'base' && ingredient.active
+  ),
+  getAromas: state => state.ingredients.filter(
+    ingredient => ingredient.type === 'aroma' && ingredient.active
+  ),
+  getAdditives: state => state.ingredients.filter(
+    ingredient => ingredient.type === 'additive' && ingredient.active
+  )
 }
 
 // Actions

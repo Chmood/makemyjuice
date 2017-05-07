@@ -1,29 +1,50 @@
 <template>
   <div class="">
 
-    <h2 class="page-title">Calculator</h2>
+    <h2 class="page-title">{{ $t("calculator") }}</h2>
 
-    <p>{{ $t("quantity") }}</p>
+    <h3 class="page-subtitle">Desired result</h3>
 
     <hr>
 
-    <h3 class="page-subtitle">Unread messages ({{ nMessagesUnread }})</h3>
+    <h4>
+      {{ $tc("base", 1) }}
+    </h4>
+    <p>
+      {{ $t("quantity") }}
+      <input v-model="quantity">&nbsp;mL
+    </p>
+    <p>
+      {{ $t("PGVGRatio") }}
+      <input v-model="PGVGRatio">&nbsp;%
+    </p>
+    <p>
+      {{ $t("nicotine") }}
+      <input v-model="nicotine">&nbsp;mg/mL
+    </p>
 
-    <messages
-      :compact="true"
-      :customVisibility="'unread'"
-    ></messages>
+    <hr>
+
+    <RecipeIngredients type="aroma">
+    </RecipeIngredients>
+
+    <hr>
+
+    <RecipeIngredients type="additive">
+    </RecipeIngredients>
+
+    <hr>
 
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
-import Messages from './Messages.vue'
+import RecipeIngredients from './RecipeIngredients.vue'
 
 export default {
   components: {
-    Messages
+    RecipeIngredients
   },
   data () {
     return {
@@ -31,19 +52,28 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'messages'
+      'getRecipeQuantity',
+      'getRecipePGVGRatio',
+      'getRecipeNicotine'
     ]),
-    nMessagesUnread () {
-      return this.messages.filter(message => !message.read).length
+    quantity: {
+      get () { return this.getRecipeQuantity },
+      set (value) { this.$store.commit('SET_RECIPE_QUANTITY', value) }
+    },
+    PGVGRatio: {
+      get () { return this.getRecipePGVGRatio * 100 },
+      set (value) { this.$store.commit('SET_RECIPE_PGVGRATIO', value / 100) }
+    },
+    nicotine: {
+      get () { return this.getRecipeNicotine },
+      set (value) { this.$store.commit('SET_RECIPE_NICOTINE', value) }
     }
   },
 
   methods: {
     ...mapActions([
-      // 'fetchMessages'
     ]),
     ...mapMutations([
-      // 'TOGGLE_ALL_MESSAGES'
     ])
   }
 }

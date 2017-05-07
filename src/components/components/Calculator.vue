@@ -1,7 +1,7 @@
 <template>
   <div class="">
 
-    <h3 class="page-subtitle">Desired result</h3>
+    <h3 class="page-subtitle">{{ $tc("recipe", 1) }}</h3>
 
     <hr>
 
@@ -33,7 +33,7 @@
 
     <hr>
 
-    <h3 class="page-subtitle">Recipe</h3>
+    <h3 class="page-subtitle">{{ $tc("ingredient", 2) }}</h3>
 
 
   </div>

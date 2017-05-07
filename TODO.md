@@ -1,6 +1,10 @@
 ### FEATURES
 
-* language chooser
+* i18n
+
+  * language chooser
+  * split language file
+
 * Server side rendering (for SEO!)
 
 * UI

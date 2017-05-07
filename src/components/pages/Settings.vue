@@ -3,7 +3,6 @@
 
     <h2 class="page-title">{{ $tc("setting", 2) }}</h2>
 
-
   </div>
 </template>
 

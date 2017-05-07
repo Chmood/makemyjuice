@@ -19,9 +19,12 @@ const messages = {
     hello: 'hellooo',
     language: 'language',
 
+    menu: 'menu',
     calculator: 'calculator',
-    quantity: 'quantity',
     ingredient: 'ingredient | ingredients',
+    setting: 'setting | settings',
+
+    quantity: 'quantity',
     base: 'base | bases',
     aroma: 'aroma | aromas',
     deleteAroma: 'delete aroma | delete aromas',
@@ -50,9 +53,12 @@ const messages = {
     hello: 'coucou',
     language: 'langue',
 
+    menu: 'menu',
     calculator: 'calculateur',
-    quantity: 'quantité',
     ingredient: 'ingrédient | ingrédients',
+    setting: 'paramètre | paramètres',
+
+    quantity: 'quantité',
     base: 'base | bases',
     aroma: 'arôme | arômes',
     deleteAroma: 'supprimer l\'arôme | supprimer les arômes',

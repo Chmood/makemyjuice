@@ -146,7 +146,7 @@
 
 <style lang="scss" scoped>
 
-  @import "styles/main";
+  @import "../styles/main";
 
   article {
     margin-bottom: $gutter;

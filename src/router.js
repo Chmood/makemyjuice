@@ -28,19 +28,19 @@ export default new VueRouter({
       children: [ // Sub-routes
         {
           path: '', // default subroute
-          component: load('Home')
-        },
-        {
-          path: 'messages',
-          component: load('Messages')
+          component: load('pages/Home')
         },
         {
           path: 'ingredients',
-          component: load('Ingredients')
+          component: load('pages/Ingredients')
+        },
+        {
+          path: 'settings',
+          component: load('pages/Settings')
         }
       ]
     },
-    { path: '/foo', component: load('Foo') }, // example simple route
+    // { path: '/foo', component: load('Foo') }, // example simple route
     { path: '*', component: load('Error404') } // Not found
   ]
 })

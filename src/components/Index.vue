@@ -17,13 +17,13 @@
     </div>
 
     <!-- SEARCHBAR -->
-    <div slot="header" class="toolbar primary">
+    <!-- <div slot="header" class="toolbar primary">
       <q-search class="primary"
         :debounce="600"
         placeholder="Search"
         icon="search"
       ></q-search>
-    </div>
+    </div> -->
 
     <!-- DRAWER (LEFT MENU) -->
     <q-drawer ref="leftDrawer">
@@ -34,20 +34,20 @@
       </div>
 
       <div class="list no-border platform-delimiter">
-        <div class="list-label">MENU</div>
+        <div class="list-label">{{ $t("menu") }}</div>
         <q-drawer-link icon="home" to="/">
-          Calculator
+          {{ $t("calculator") }}
         </q-drawer-link>
         <!-- <q-drawer-link icon="mail" to="/messages">
           Messages
           <span class="floating label bg-primary">{{ nMessagesUnread }}</span>
         </q-drawer-link> -->
         <q-drawer-link icon="shopping_cart" to="/ingredients">
-          Ingredients
+          {{ $tc("ingredient", 2) }}
           <!-- <span class="floating label bg-primary">{{ nMessagesUnread }}</span> -->
         </q-drawer-link>
-        <q-drawer-link icon="build" to="/bar">
-          Settings
+        <q-drawer-link icon="build" to="/settings">
+          {{ $tc("setting", 2) }}
         </q-drawer-link>
         <!-- <hr>
         <q-drawer-link icon="account_box" to="/profile" exact>

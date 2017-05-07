@@ -1,8 +1,6 @@
 <template>
   <div class="">
 
-    <h2 class="page-title">{{ $t("calculator") }}</h2>
-
     <h3 class="page-subtitle">Desired result</h3>
 
     <hr>
@@ -34,6 +32,9 @@
     </RecipeIngredients>
 
     <hr>
+
+    <h3 class="page-subtitle">Recipe</h3>
+
 
   </div>
 </template>

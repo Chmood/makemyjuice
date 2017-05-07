@@ -2,7 +2,6 @@
   <section class="section section--ingredients"
     :class="[compact ? 'ingredients--compact' : '']"
   >
-    <h2 class="page-title">{{ $tc("ingredient", 2) }}</h2>
 
     <q-tabs class="ingredient-filters light justified margin-bottom"
       :refs="$refs"
@@ -138,6 +137,6 @@
 
 <style lang="scss" scoped>
 
-  @import "styles/main";
+  @import "../styles/main";
 
 </style>

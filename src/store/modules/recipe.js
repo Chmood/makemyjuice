@@ -2,6 +2,7 @@ import * as types from '../mutation-types'
 
 // Initial state
 const state = {
+  name: 'My Recipe',
   quantity: 50,
   PGVGRatio: 0.5,
   nicotine: 6,
@@ -16,6 +17,9 @@ const state = {
 
 // Mutations
 const mutations = {
+  [types.SET_RECIPE_NAME] (state, value) {
+    state.name = value
+  },
   [types.SET_RECIPE_QUANTITY] (state, value) {
     state.quantity = parseFloat(value)
   },
@@ -66,6 +70,7 @@ const mutations = {
 
 // Getters
 const getters = {
+  getRecipeName: state => state.name,
   getRecipeQuantity: state => state.quantity,
   getRecipePGVGRatio: state => state.PGVGRatio,
   getRecipeNicotine: state => state.nicotine,

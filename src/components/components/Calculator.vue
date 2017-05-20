@@ -3,6 +3,8 @@
 
     <h3 class="page-subtitle">{{ $tc("recipe", 1) }}</h3>
 
+    <input v-model="name">
+
     <hr>
 
     <h4>
@@ -56,10 +58,15 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'getRecipeName',
       'getRecipeQuantity',
       'getRecipePGVGRatio',
       'getRecipeNicotine'
     ]),
+    name: {
+      get () { return this.getRecipeName },
+      set (value) { this.$store.commit('SET_RECIPE_NAME', value) }
+    },
     quantity: {
       get () { return this.getRecipeQuantity },
       set (value) { this.$store.commit('SET_RECIPE_QUANTITY', value) }

@@ -1,12 +1,36 @@
 <template>
   <section>
 
-    <article v-for="(result, index) in results" :key="index">
-      <span>{{ index + 1 }}</span>
-      <span>{{ result.name }} ({{ result.id }})</span>
-      <span>{{ result.ratio * 100 }}%</span>
-      <span>{{ result.quantity }}mL</span>
-    </article>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>name</th>
+          <th>ratio</th>
+          <th>quantity</th>
+          <th>price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(result, index) in results" :key="index">
+          <td>{{ index + 1 }}</td>
+          <td>{{ result.name }} ({{ result.id }})</td>
+          <td>{{ result.ratio * 100 }}%</td>
+          <td>{{ result.quantity }}mL</td>
+          <td>{{ result.price }}$</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td>TOTAL</td>
+          <td>{{ totalRatio * 100 }}%</td>
+          <td>{{ totalQuantity }}mL</td>
+          <td>{{ totalPrice }}$</td>
+        </tr>
+      </tfoot>
+    </table>
+
 
   </section>
 </template>
@@ -121,7 +145,8 @@
             id: ingredient.id,
             name: this.getIngredients[ingredientId].name,
             ratio: ingredient.ratio,
-            quantity: ingredient.ratio * this.getRecipeQuantity
+            quantity: ingredient.ratio * this.getRecipeQuantity,
+            price: this.getIngredients[ingredientId].price * (ingredient.ratio * this.getRecipeQuantity / 1000)
           })
         })
 
@@ -139,6 +164,23 @@
           quantity: (1 - sum) * basesPGVGRatio * this.getRecipeQuantity
         })
 
+        return r
+      },
+      totalRatio () {
+        let r = 0
+        this.results.forEach(ingredient => { r += ingredient.ratio })
+        return r
+      },
+      totalQuantity () {
+        let r = 0
+        this.results.forEach(ingredient => { r += ingredient.quantity })
+        return r
+      },
+      totalPrice () {
+        let r = 0
+        this.results.forEach(ingredient => {
+          r += ingredient.price ? ingredient.price : 0
+        })
         return r
       }
     },
@@ -162,6 +204,10 @@
 
   article {
     margin-bottom: $gutter;
+  }
+
+  td {
+    padding: $gutter;
   }
 
 </style>

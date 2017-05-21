@@ -65,9 +65,10 @@
         return this.getRecipeAromas.concat(this.getRecipeAdditives)
       },
       results () {
-        let basesRatio = 1 // bases / all ratio
-        let aromasRatio = 0 // aromas / all ratio
+        let basesRatio = 1 // bases / all
+        let aromasRatio = 0 // aromas / all
         let additivesRatio = 0 // additives / all
+        let nicotineBaseRatio = 0 // nicotine base / all
 
         let aromasQuantity = 0
         let aromasQuantityPG = 0
@@ -78,6 +79,42 @@
 
         console.warn('=========================================')
 
+        // NICOTINE COMPUTING
+
+        let baseNicotineId
+        let nicotineRatio = 0
+        let quantityBaseNicotine = 0
+
+        if (this.getRecipeNicotine && this.getRecipeNicotine > 0) {
+          console.log('Desired nicotine', this.getRecipeNicotine, 'mg/mL')
+
+          // Find the strongest nicotine base available
+          this.getBases.forEach(base => {
+            if (base.nicotine > nicotineRatio) {
+              nicotineRatio = base.nicotine
+              baseNicotineId = base.id
+            }
+          })
+
+          // Check if we have any nicotine base first
+          if (nicotineRatio === 0) { console.warn('No nicotine base available!') }
+          // Check if our base is strong enough for the recipe
+          else if (nicotineRatio < this.getRecipeNicotine) {
+            console.warn('Nicotine base not strong enought!')
+          }
+          console.log('Strongest nicotine base', nicotineRatio, 'mg/mL')
+
+          quantityBaseNicotine = this.getRecipeQuantity * this.getRecipeNicotine / nicotineRatio
+          nicotineBaseRatio = quantityBaseNicotine / this.getRecipeQuantity
+          // Substract nicotine base from total
+          basesRatio -= nicotineBaseRatio
+
+          console.log('Nicotine base quantity', quantityBaseNicotine, 'mL')
+          console.log('Nicotine base PG/VG ratio', this.getBases[baseNicotineId].PGVGRatio * 100, '%')
+        }
+
+        console.log('Remaining base ratio after nicotine', basesRatio)
+
         // ADDITIVES
 
         // Substract additives from total
@@ -85,6 +122,8 @@
           basesRatio -= ingredient.ratio
           additivesRatio += ingredient.ratio
         })
+
+        console.log('Remaining base ratio after additives', basesRatio)
 
         // AROMAS
 
@@ -126,13 +165,14 @@
         console.log('Total bases quantity', basesQuantity, 'mL')
         console.log('Total bases PG/VG ratio', basesPGVGRatio * 100, '%')
 
+        console.log('Remaining base ratio after aromas', basesRatio)
+
         // TODO: use bases ingredients to achieve the mix
-        // TODO: add nicotine computations
 
         // POPULATE INGREDIENTS
 
         const r = []
-        let sum = 0
+        let sum = 0 + nicotineBaseRatio
 
         this.recipeIngredients.forEach(ingredient => {
           const ingredientId = this.getIngredients.findIndex(
@@ -164,6 +204,15 @@
           quantity: (1 - sum) * basesPGVGRatio * this.getRecipeQuantity
         })
 
+        // Nicotine base
+        r.unshift({
+          id: 0,
+          name: this.getBases[baseNicotineId].name,
+          ratio: nicotineBaseRatio,
+          quantity: quantityBaseNicotine,
+          price: this.getBases[baseNicotineId].price * quantityBaseNicotine / 1000
+        })
+
         return r
       },
       totalRatio () {
@@ -178,9 +227,7 @@
       },
       totalPrice () {
         let r = 0
-        this.results.forEach(ingredient => {
-          r += ingredient.price ? ingredient.price : 0
-        })
+        this.results.forEach(ingredient => { r += ingredient.price ? ingredient.price : 0 })
         return r
       }
     },

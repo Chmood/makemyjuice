@@ -11,6 +11,7 @@ export default {
     online: 'online',
     offline: 'offline',
 
+    name: 'name',
     quantity: 'quantity',
     base: 'base | bases',
     aroma: 'aroma | aromas',
@@ -49,6 +50,7 @@ export default {
     online: 'en-ligne',
     offline: 'hors-ligne',
 
+    name: 'nom',
     quantity: 'quantité',
     base: 'base | bases',
     aroma: 'arôme | arômes',

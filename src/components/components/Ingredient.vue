@@ -6,7 +6,7 @@
     ]"
   >
 
-  <h4>{{ ingredient.name }}</h4>
+  <h4 v-bind:style="{ backgroundColor: ingredient.color }">{{ ingredient.name }}</h4>
   <p>{{ ingredient.description }}</p>
 
   <div>{{ $t("price") }}: {{ ingredient.price }}</div>

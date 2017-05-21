@@ -1,6 +1,15 @@
 <template>
   <section>
 
+    <div class="beaker" style="height: 20rem;">
+      <div
+      v-for="(result, index) in results"
+      :key="index"
+      v-bind:style="{ backgroundColor: result.color, flexBasis: result.ratio * 100 + '%' }"
+      >
+      </div>
+    </div>
+
     <table v-if="results.length">
       <thead>
         <tr>
@@ -13,7 +22,7 @@
       </thead>
       <tbody>
         <tr v-for="(result, index) in results" :key="index">
-          <td>{{ index + 1 }}</td>
+          <td v-bind:style="{ backgroundColor: result.color}">{{ index + 1 }}</td>
           <td>{{ result.name }} (ID:{{ result.id }})</td>
           <td>{{ roundNumber(result.ratio * 100) }}%</td>
           <td>{{ roundNumber(result.quantity) }}mL</td>
@@ -288,7 +297,8 @@
               name: this.getIngredients[ingredientId].name,
               ratio: ingredient.ratio,
               quantity: ingredient.ratio * this.getRecipeQuantity,
-              price: this.getIngredients[ingredientId].price * (ingredient.ratio * this.getRecipeQuantity / 1000)
+              price: this.getIngredients[ingredientId].price * (ingredient.ratio * this.getRecipeQuantity / 1000),
+              color: this.getIngredients[ingredientId].color
             })
           })
 
@@ -298,7 +308,8 @@
             name: ingredientBaseMin.name,
             ratio: quantityPGVGRatioBaseMin / this.getRecipeQuantity,
             quantity: quantityPGVGRatioBaseMin,
-            price: ingredientBaseMin.price * quantityPGVGRatioBaseMin / 1000
+            price: ingredientBaseMin.price * quantityPGVGRatioBaseMin / 1000,
+            color: ingredientBaseMin.color
           })
 
           // Max PG/VG ratio base
@@ -307,7 +318,8 @@
             name: ingredientBaseMax.name,
             ratio: quantityPGVGRatioBaseMax / this.getRecipeQuantity,
             quantity: quantityPGVGRatioBaseMax,
-            price: ingredientBaseMax.price * quantityPGVGRatioBaseMax / 1000
+            price: ingredientBaseMax.price * quantityPGVGRatioBaseMax / 1000,
+            color: ingredientBaseMax.color
           })
 
           // Nicotine base
@@ -316,7 +328,8 @@
             name: ingredientBaseNicotine.name,
             ratio: nicotineBaseRatio,
             quantity: quantityBaseNicotine,
-            price: ingredientBaseNicotine.price * quantityBaseNicotine / 1000
+            price: ingredientBaseNicotine.price * quantityBaseNicotine / 1000,
+            color: ingredientBaseNicotine.color
           })
         }
 
@@ -355,6 +368,15 @@
 <style lang="scss" scoped>
 
   @import "../styles/main";
+
+  .beaker {
+    display: flex;
+    flex-direction: column;
+
+    > * {
+      // border: 2px solid red
+    }
+  }
 
   article {
     margin-bottom: $gutter;

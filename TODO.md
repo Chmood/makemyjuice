@@ -27,6 +27,7 @@
 ### CONFIGURATION
 
 * Language
+* Currency
 
 * No nicotine mode
 * Base mode (no aromas - no additives too?)

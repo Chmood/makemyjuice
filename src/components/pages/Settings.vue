@@ -11,8 +11,8 @@
           <q-select
             class="full-width"
             type="radio"
-            v-model="currentFoo"
-            :options="foo"
+            v-model="locale"
+            :options="locales"
           ></q-select>
         </div>
       </label>
@@ -157,7 +157,29 @@ export default {
   },
   computed: {
     ...mapGetters([
-    ])
+      'language',
+      'currency'
+    ]),
+    locale: {
+      get () { return this.language },
+      set (value) {
+        console.log(value)
+        this.$i18n.locale = value
+        this.$store.commit('SET_LANGUAGE', value)
+      }
+    },
+    locales () {
+      const langs = []
+      const messages = this.$i18n._vm.messages
+      Object.keys(messages).forEach(lang => {
+        console.log()
+        langs.push({
+          label: messages[lang].LANG,
+          value: lang
+        })
+      })
+      return langs
+    }
   },
 
   methods: {

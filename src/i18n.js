@@ -1,5 +1,6 @@
 export default {
   en: {
+    LANG: 'english',
     hello: 'hellooo',
     language: 'language',
 
@@ -39,6 +40,7 @@ export default {
   },
 
   fr: {
+    LANG: 'français',
     hello: 'coucou',
     language: 'langue',
 

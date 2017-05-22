@@ -132,11 +132,8 @@ export default {
   computed: {
     ...mapGetters([
       'isOnline',
-      'messages'
-    ]),
-    nMessagesUnread () {
-      return this.messages.filter(message => !message.read).length
-    }
+      'language'
+    ])
   },
   methods: {
     updateIsOnline () {
@@ -216,6 +213,8 @@ export default {
     }
   },
   mounted () {
+    // Get the locale from the store and apply it
+    this.$i18n.locale = this.language
   },
   beforeDestroy () {
   }

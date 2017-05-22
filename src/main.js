@@ -22,7 +22,7 @@ Vue.use(VueI18n) // Use internationalization
 
 // Create VueI18n instance with options
 const i18n = new VueI18n({
-  locale: 'fr', // set default locale
+  locale: 'en', // set default locale
   messages // set locale messages
 })
 

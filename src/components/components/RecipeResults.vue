@@ -83,11 +83,21 @@
         'getRecipeNicotine',
 
         'mode',
+        'favorite',
         'currency'
       ]),
       recipeIngredients () {
         // Merge aromas and additives
         return this.getRecipeAromas.concat(this.getRecipeAdditives)
+      },
+      recipeQuantity () {
+        return this.favorite.favoriteQuantity ? this.favorite.quantity : this.getRecipeQuantity
+      },
+      recipePGVGRatio () {
+        return this.favorite.favoritePGVGRatio ? this.favorite.PGVGRatio : this.getRecipePGVGRatio
+      },
+      recipeNicotine () {
+        return this.favorite.favoriteNicotine ? this.favorite.nicotine : this.getRecipeNicotine
       },
       results () {
         // Faisability of the recipe (considering our available ingredients)
@@ -143,11 +153,11 @@
             basesRatio -= ingredient.ratio
             aromasRatio += ingredient.ratio
 
-            aromasQuantity += ingredient.ratio * this.getRecipeQuantity
-            aromasQuantityPG += ingredientReal.PGVGRatio * ingredient.ratio * this.getRecipeQuantity
+            aromasQuantity += ingredient.ratio * this.recipeQuantity
+            aromasQuantityPG += ingredientReal.PGVGRatio * ingredient.ratio * this.recipeQuantity
           })
 
-          basesQuantity = this.getRecipeQuantity * basesRatio
+          basesQuantity = this.recipeQuantity * basesRatio
           aromasPGVGRatio = aromasQuantityPG / aromasQuantity
 
           console.log('Total aromas quantity', aromasQuantity, 'mL')
@@ -168,7 +178,7 @@
             isRecipeDoable = false
           }
 
-          basesPGVGRatio = (this.getRecipePGVGRatio * (aromasQuantity + basesQuantity) - aromasQuantity * aromasPGVGRatio) / basesQuantity
+          basesPGVGRatio = (this.recipePGVGRatio * (aromasQuantity + basesQuantity) - aromasQuantity * aromasPGVGRatio) / basesQuantity
 
           if (basesPGVGRatio < 0) {
             console.warn('Too much VG!')
@@ -188,8 +198,8 @@
         // NICOTINE COMPUTING
         console.log('NICOTINE----------------------------------')
 
-        if (this.mode.nicotine && this.getRecipeNicotine && this.getRecipeNicotine > 0) {
-          console.log('Desired nicotine', this.getRecipeNicotine, 'mg/mL')
+        if (this.mode.nicotine && this.recipeNicotine && this.recipeNicotine > 0) {
+          console.log('Desired nicotine', this.recipeNicotine, 'mg/mL')
 
           // Find the strongest nicotine base available
           // TODO: try the others, or use multiple
@@ -206,14 +216,14 @@
             isRecipeDoable = false
           }
           // Check if our base is strong enough for the recipe
-          else if (nicotineRatio < this.getRecipeNicotine) {
+          else if (nicotineRatio < this.recipeNicotine) {
             console.warn('Nicotine base not strong enought!')
             isRecipeDoable = false
           }
           console.log('Strongest nicotine base ID', baseNicotineId, nicotineRatio, 'mg/mL')
 
-          quantityBaseNicotine = this.getRecipeQuantity * this.getRecipeNicotine / nicotineRatio
-          nicotineBaseRatio = quantityBaseNicotine / this.getRecipeQuantity
+          quantityBaseNicotine = this.recipeQuantity * this.recipeNicotine / nicotineRatio
+          nicotineBaseRatio = quantityBaseNicotine / this.recipeQuantity
           // Substract nicotine base from total
           basesRatio -= nicotineBaseRatio
 
@@ -247,8 +257,8 @@
 
         // Compute the PG/VG ratio of what we need to add
         // We neglect additives here (no PG or VG in them)
-        const basesNoNicotineQuantity = this.getRecipeQuantity * basesRatio
-        const basesNoNicotinePGVGRatio = (this.getRecipePGVGRatio * (submixQuantity + basesNoNicotineQuantity) - submixQuantity * submixPGVGRatio) / basesNoNicotineQuantity
+        const basesNoNicotineQuantity = this.recipeQuantity * basesRatio
+        const basesNoNicotinePGVGRatio = (this.recipePGVGRatio * (submixQuantity + basesNoNicotineQuantity) - submixQuantity * submixPGVGRatio) / basesNoNicotineQuantity
 
         // Check if the PGVG ratio is ok
         if (basesNoNicotinePGVGRatio < 0) {
@@ -325,8 +335,8 @@
                 id: ingredient.id,
                 name: this.getIngredients[ingredientId].name,
                 ratio: ingredient.ratio,
-                quantity: ingredient.ratio * this.getRecipeQuantity,
-                price: this.getIngredients[ingredientId].price * (ingredient.ratio * this.getRecipeQuantity / 1000),
+                quantity: ingredient.ratio * this.recipeQuantity,
+                price: this.getIngredients[ingredientId].price * (ingredient.ratio * this.recipeQuantity / 1000),
                 color: this.getIngredients[ingredientId].color,
                 viscosity: this.getIngredients[ingredientId].viscosity
               })
@@ -337,7 +347,7 @@
           r.unshift({
             id: PGVGRatioBaseMinId,
             name: ingredientBaseMin.name,
-            ratio: quantityPGVGRatioBaseMin / this.getRecipeQuantity,
+            ratio: quantityPGVGRatioBaseMin / this.recipeQuantity,
             quantity: quantityPGVGRatioBaseMin,
             price: ingredientBaseMin.price * quantityPGVGRatioBaseMin / 1000,
             color: ingredientBaseMin.color,
@@ -348,7 +358,7 @@
           r.unshift({
             id: PGVGRatioBaseMaxId,
             name: ingredientBaseMax.name,
-            ratio: quantityPGVGRatioBaseMax / this.getRecipeQuantity,
+            ratio: quantityPGVGRatioBaseMax / this.recipeQuantity,
             quantity: quantityPGVGRatioBaseMax,
             price: ingredientBaseMax.price * quantityPGVGRatioBaseMax / 1000,
             color: ingredientBaseMax.color,

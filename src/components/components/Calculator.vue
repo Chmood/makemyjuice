@@ -10,17 +10,38 @@
     <h4>
       {{ $tc("base", 1) }}
     </h4>
+
     <p>
       {{ $t("quantity") }}
-      <input v-model="quantity">&nbsp;mL
+      <template v-if="favoriteQuantity">
+        <input v-model.number="favorite.quantity" type="number" disabled="true">&nbsp;mL
+      </template>
+      <template v-else>
+        <input v-model.number="quantity" type="number">&nbsp;mL
+      </template>
+      <q-toggle v-model="favoriteQuantity" class="purple"></q-toggle>
     </p>
+
     <p>
       {{ $t("PGVGRatio") }}
-      <input v-model="PGVGRatio">&nbsp;%
+      <template v-if="favoritePGVGRatio">
+        <input v-model.number="favorite.PGVGRatio" type="number" disabled="true">&nbsp;%
+      </template>
+      <template v-else>
+        <input v-model.number="PGVGRatio" type="number">&nbsp;%
+      </template>
+      <q-toggle v-model="favoritePGVGRatio" class="purple"></q-toggle>
     </p>
+
     <p v-if="mode.nicotine">
       {{ $t("nicotine") }}
-      <input v-model="nicotine">&nbsp;mg/mL
+      <template v-if="favoriteNicotine">
+        <input v-model.number="favorite.nicotine" type="number" disabled="true">&nbsp;mg/mL
+      </template>
+      <template v-else>
+        <input v-model.number="nicotine" type="number">&nbsp;mg/mL
+      </template>
+      <q-toggle v-model="favoriteNicotine" class="purple"></q-toggle>
     </p>
 
     <hr>
@@ -65,7 +86,8 @@ export default {
       'getRecipePGVGRatio',
       'getRecipeNicotine',
 
-      'mode'
+      'mode',
+      'favorite'
     ]),
     name: {
       get () { return this.getRecipeName },
@@ -82,6 +104,18 @@ export default {
     nicotine: {
       get () { return this.getRecipeNicotine },
       set (value) { this.$store.commit('SET_RECIPE_NICOTINE', value) }
+    },
+    favoriteQuantity: {
+      get () { return this.favorite.favoriteQuantity },
+      set (value) { this.$store.commit('SET_FAVORITE', {favorite: 'favoriteQuantity', value: value}) }
+    },
+    favoritePGVGRatio: {
+      get () { return this.favorite.favoritePGVGRatio },
+      set (value) { this.$store.commit('SET_FAVORITE', {favorite: 'favoritePGVGRatio', value: value}) }
+    },
+    favoriteNicotine: {
+      get () { return this.favorite.favoriteNicotine },
+      set (value) { this.$store.commit('SET_FAVORITE', {favorite: 'favoriteNicotine', value: value}) }
     }
   },
 

@@ -62,7 +62,7 @@
       <label class="item two-lines">
         <div class="item-content has-secondary">
           <div>Price mode</div>
-          <div>Show recipe price</div>
+          <div>Show recipe and ingredients price</div>
         </div>
         <div class="item-secondary">
           <q-toggle v-model="modePrice" class="red"></q-toggle>
@@ -93,37 +93,39 @@
     <div class="list">
       <label class="item two-lines">
         <div class="item-content has-secondary">
-          <div>Favourite mode</div>
+          <div>Favorite mode</div>
           <div>Use favorite settings</div>
         </div>
         <div class="item-secondary">
-          <q-toggle v-model="checked" class="red"></q-toggle>
+          <q-toggle v-model="modeFavorite" class="red"></q-toggle>
         </div>
       </label>
-      <div class="list-label">Quantity</div>
-      <label class="item two-lines">
-        <i class="item-primary">edit</i>
-        <div class="item-content has-secondary">
-          <input placeholder="Placeholder" class="full-width">
-        </div>
-        <div class="item-secondary">mL</div>
-      </label>
-      <div class="list-label">PG/VG ratio</div>
-      <label class="item two-lines">
-        <i class="item-primary">edit</i>
-        <div class="item-content has-secondary">
-          <input placeholder="Placeholder" class="full-width">
-        </div>
-        <div class="item-secondary">%</div>
-      </label>
-      <div class="list-label">Nicotine</div>
-      <label class="item two-lines">
-        <i class="item-primary">edit</i>
-        <div class="item-content has-secondary">
-          <input placeholder="Placeholder" class="full-width">
-        </div>
-        <div class="item-secondary">mg/mL</div>
-      </label>
+      <template v-if="mode.favorite">
+        <div class="list-label">Quantity</div>
+        <label class="item two-lines">
+          <i class="item-primary">opacity</i>
+          <div class="item-content has-secondary">
+            <input v-model.number="favoriteQuantity" type="number" class="full-width">
+          </div>
+          <div class="item-secondary">mL</div>
+        </label>
+        <div class="list-label">PG/VG ratio</div>
+        <label class="item two-lines">
+          <i class="item-primary">iso</i>
+          <div class="item-content has-secondary">
+            <input v-model.number="favoritePGVGRatio" type="number" class="full-width">
+          </div>
+          <div class="item-secondary">%</div>
+        </label>
+        <div class="list-label">Nicotine</div>
+        <label class="item two-lines">
+          <i class="item-primary">smoking_rooms</i>
+          <div class="item-content has-secondary">
+            <input v-model.number="favoriteNicotine" type="number" class="full-width">
+          </div>
+          <div class="item-secondary">mg/mL</div>
+        </label>
+      </template>
     </div>
 
   </div>
@@ -137,7 +139,6 @@ export default {
   },
   data () {
     return {
-      checked: true,
       isCustomCurrency: false,
       currencies: [
         { label: 'dollar', value: '$' },
@@ -151,7 +152,8 @@ export default {
     ...mapGetters([
       'language',
       'currency',
-      'mode'
+      'mode',
+      'favorite'
     ]),
     locale: {
       get () { return this.language },
@@ -203,6 +205,22 @@ export default {
     modeBeaker: {
       get () { return this.mode.beaker },
       set (value) { this.$store.commit('SET_MODE', {mode: 'beaker', isActive: value}) }
+    },
+    modeFavorite: {
+      get () { return this.mode.favorite },
+      set (value) { this.$store.commit('SET_MODE', {mode: 'favorite', isActive: value}) }
+    },
+    favoriteQuantity: {
+      get () { return this.favorite.quantity },
+      set (value) { this.$store.commit('SET_FAVORITE', {favorite: 'quantity', value: value}) }
+    },
+    favoritePGVGRatio: {
+      get () { return this.favorite.PGVGRatio * 100 },
+      set (value) { this.$store.commit('SET_FAVORITE', {favorite: 'PGVGRatio', value: value / 100}) }
+    },
+    favoriteNicotine: {
+      get () { return this.favorite.nicotine },
+      set (value) { this.$store.commit('SET_FAVORITE', {favorite: 'nicotine', value: value}) }
     }
   },
 

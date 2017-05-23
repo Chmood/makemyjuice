@@ -9,7 +9,16 @@ const state = {
     base: false,
     price: true,
     drop: true,
-    beaker: true
+    beaker: true,
+    favorite: false
+  },
+  favorite: {
+    quantity: 50,
+    favoriteQuantity: false,
+    PGVGRatio: 0.5,
+    favoritePGVGRatio: false,
+    nicotine: 6,
+    favoriteNicotine: false
   }
 }
 
@@ -17,14 +26,16 @@ const state = {
 const mutations = {
   [types.SET_LANGUAGE] (state, lang) { state.language = lang },
   [types.SET_CURRENCY] (state, currency) { state.currency = currency },
-  [types.SET_MODE] (state, {mode, isActive}) { state.mode[mode] = isActive }
+  [types.SET_MODE] (state, {mode, isActive}) { state.mode[mode] = isActive },
+  [types.SET_FAVORITE] (state, {favorite, value}) { state.favorite[favorite] = value }
 }
 
 // Getters
 const getters = {
   language: state => state.language,
   currency: state => state.currency,
-  mode: state => state.mode
+  mode: state => state.mode,
+  favorite: state => state.favorite
 }
 
 // Actions

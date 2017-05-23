@@ -184,7 +184,7 @@
         // NICOTINE COMPUTING
         console.log('NICOTINE----------------------------------')
 
-        if (this.getRecipeNicotine && this.getRecipeNicotine > 0) {
+        if (this.mode.nicotine && this.getRecipeNicotine && this.getRecipeNicotine > 0) {
           console.log('Desired nicotine', this.getRecipeNicotine, 'mg/mL')
 
           // Find the strongest nicotine base available
@@ -223,7 +223,13 @@
         console.log('BASES-------------------------------------')
         // Compute the PG/VG ratio of what we have now
         const submixQuantity = aromasQuantity + quantityBaseNicotine
-        const submixPGVGRatio = ((aromasQuantity * aromasPGVGRatio) + (quantityBaseNicotine * this.getBases[baseNicotineId].PGVGRatio)) / submixQuantity
+        let submixPGVGRatio
+        if (this.mode.nicotine) {
+          submixPGVGRatio = ((aromasQuantity * aromasPGVGRatio) + (quantityBaseNicotine * this.getBases[baseNicotineId].PGVGRatio)) / submixQuantity
+        }
+        else {
+          submixPGVGRatio = (aromasQuantity * aromasPGVGRatio) / submixQuantity
+        }
 
         console.log('Submix', submixQuantity, 'mL @', submixPGVGRatio * 100, '% PG/VG')
 
@@ -336,15 +342,17 @@
           })
 
           // Nicotine base
-          r.unshift({
-            id: baseNicotineId,
-            name: ingredientBaseNicotine.name,
-            ratio: nicotineBaseRatio,
-            quantity: quantityBaseNicotine,
-            price: ingredientBaseNicotine.price * quantityBaseNicotine / 1000,
-            color: ingredientBaseNicotine.color,
-            viscosity: ingredientBaseNicotine.viscosity
-          })
+          if (this.mode.nicotine) {
+            r.unshift({
+              id: baseNicotineId,
+              name: ingredientBaseNicotine.name,
+              ratio: nicotineBaseRatio,
+              quantity: quantityBaseNicotine,
+              price: ingredientBaseNicotine.price * quantityBaseNicotine / 1000,
+              color: ingredientBaseNicotine.color,
+              viscosity: ingredientBaseNicotine.viscosity
+            })
+          }
         }
 
         return r

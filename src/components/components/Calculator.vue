@@ -18,7 +18,7 @@
       {{ $t("PGVGRatio") }}
       <input v-model="PGVGRatio">&nbsp;%
     </p>
-    <p>
+    <p v-if="mode.nicotine">
       {{ $t("nicotine") }}
       <input v-model="nicotine">&nbsp;mg/mL
     </p>
@@ -61,7 +61,9 @@ export default {
       'getRecipeName',
       'getRecipeQuantity',
       'getRecipePGVGRatio',
-      'getRecipeNicotine'
+      'getRecipeNicotine',
+
+      'mode'
     ]),
     name: {
       get () { return this.getRecipeName },

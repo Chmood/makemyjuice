@@ -7,7 +7,7 @@
 
 * Features
 
-  * todo modes : nicotine, base
+  * todo modes : base
   * allow creation and edition of ingredients
   * allow the user to save his recipes (+ import/export)
   * fix custom currency mode

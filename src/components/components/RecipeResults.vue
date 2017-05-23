@@ -121,63 +121,67 @@
         // ADDITIVES
         console.log('ADDITIVES---------------------------------')
 
-        // Substract additives from total
-        this.getRecipeAdditives.forEach(ingredient => {
-          basesRatio -= ingredient.ratio
-          additivesRatio += ingredient.ratio
-        })
+        if (!this.mode.base) {
+          // Substract additives from total
+          this.getRecipeAdditives.forEach(ingredient => {
+            basesRatio -= ingredient.ratio
+            additivesRatio += ingredient.ratio
+          })
+        }
 
         console.log('Remaining base ratio after additives', basesRatio)
 
         // AROMAS
         console.log('AROMAS------------------------------------')
 
-        // Substract aromas from total
-        this.getRecipeAromas.forEach(ingredient => {
-          const ingredientId = this.getIngredients.findIndex(i => i.id === ingredient.id)
-          const ingredientReal = this.getIngredients[ingredientId]
+        if (!this.mode.base) {
+          // Substract aromas from total
+          this.getRecipeAromas.forEach(ingredient => {
+            const ingredientId = this.getIngredients.findIndex(i => i.id === ingredient.id)
+            const ingredientReal = this.getIngredients[ingredientId]
 
-          basesRatio -= ingredient.ratio
-          aromasRatio += ingredient.ratio
+            basesRatio -= ingredient.ratio
+            aromasRatio += ingredient.ratio
 
-          aromasQuantity += ingredient.ratio * this.getRecipeQuantity
-          aromasQuantityPG += ingredientReal.PGVGRatio * ingredient.ratio * this.getRecipeQuantity
-        })
+            aromasQuantity += ingredient.ratio * this.getRecipeQuantity
+            aromasQuantityPG += ingredientReal.PGVGRatio * ingredient.ratio * this.getRecipeQuantity
+          })
 
-        basesQuantity = this.getRecipeQuantity * basesRatio
-        aromasPGVGRatio = aromasQuantityPG / aromasQuantity
+          basesQuantity = this.getRecipeQuantity * basesRatio
+          aromasPGVGRatio = aromasQuantityPG / aromasQuantity
 
-        console.log('Total aromas quantity', aromasQuantity, 'mL')
-        console.log('Total aromas PG/VG ratio', aromasPGVGRatio * 100, '%')
+          console.log('Total aromas quantity', aromasQuantity, 'mL')
+          console.log('Total aromas PG/VG ratio', aromasPGVGRatio * 100, '%')
 
-        if (additivesRatio > 1 || aromasRatio > 1) {
-          if (additivesRatio > 1) {
-            console.warn('Too much additives!')
+          if (additivesRatio > 1 || aromasRatio > 1) {
+            if (additivesRatio > 1) {
+              console.warn('Too much additives!')
+              isRecipeDoable = false
+            }
+            if (aromasRatio > 1) {
+              console.warn('Too much aromas!')
+              isRecipeDoable = false
+            }
+          }
+          else if ((aromasRatio + additivesRatio) > 1) {
+            console.warn('Too much aromas and/or additives!')
             isRecipeDoable = false
           }
-          if (aromasRatio > 1) {
-            console.warn('Too much aromas!')
+
+          basesPGVGRatio = (this.getRecipePGVGRatio * (aromasQuantity + basesQuantity) - aromasQuantity * aromasPGVGRatio) / basesQuantity
+
+          if (basesPGVGRatio < 0) {
+            console.warn('Too much VG!')
             isRecipeDoable = false
           }
-        }
-        else if ((aromasRatio + additivesRatio) > 1) {
-          console.warn('Too much aromas and/or additives!')
-          isRecipeDoable = false
-        }
+          else if (basesPGVGRatio > 1) {
+            console.warn('Too much PG!')
+            isRecipeDoable = false
+          }
 
-        basesPGVGRatio = (this.getRecipePGVGRatio * (aromasQuantity + basesQuantity) - aromasQuantity * aromasPGVGRatio) / basesQuantity
-
-        if (basesPGVGRatio < 0) {
-          console.warn('Too much VG!')
-          isRecipeDoable = false
+          console.log('Total bases quantity', basesQuantity, 'mL')
+          console.log('Total bases PG/VG ratio', basesPGVGRatio * 100, '%')
         }
-        else if (basesPGVGRatio > 1) {
-          console.warn('Too much PG!')
-          isRecipeDoable = false
-        }
-
-        console.log('Total bases quantity', basesQuantity, 'mL')
-        console.log('Total bases PG/VG ratio', basesPGVGRatio * 100, '%')
 
         console.log('Remaining base ratio after aromas', basesRatio)
 
@@ -224,11 +228,19 @@
         // Compute the PG/VG ratio of what we have now
         const submixQuantity = aromasQuantity + quantityBaseNicotine
         let submixPGVGRatio
-        if (this.mode.nicotine) {
+        if (this.mode.nicotine && !this.mode.base) { // nicotine + aromas
           submixPGVGRatio = ((aromasQuantity * aromasPGVGRatio) + (quantityBaseNicotine * this.getBases[baseNicotineId].PGVGRatio)) / submixQuantity
         }
         else {
-          submixPGVGRatio = (aromasQuantity * aromasPGVGRatio) / submixQuantity
+          if (!this.mode.nicotine && this.mode.base) { // no nicotine, no aromas
+            submixPGVGRatio = 0
+          }
+          else if (this.mode.nicotine) { // only nicotine
+            submixPGVGRatio = (quantityBaseNicotine * this.getBases[baseNicotineId].PGVGRatio) / submixQuantity
+          }
+          else { // only aromas
+            submixPGVGRatio = (aromasQuantity * aromasPGVGRatio) / submixQuantity
+          }
         }
 
         console.log('Submix', submixQuantity, 'mL @', submixPGVGRatio * 100, '% PG/VG')
@@ -303,21 +315,23 @@
 
         // Aromas & additives
         if (isRecipeDoable) {
-          this.recipeIngredients.forEach(ingredient => {
-            const ingredientId = this.getIngredients.findIndex(
-              i => i.id === ingredient.id
-            )
+          if (!this.mode.base) {
+            this.recipeIngredients.forEach(ingredient => {
+              const ingredientId = this.getIngredients.findIndex(
+                i => i.id === ingredient.id
+              )
 
-            r.push({
-              id: ingredient.id,
-              name: this.getIngredients[ingredientId].name,
-              ratio: ingredient.ratio,
-              quantity: ingredient.ratio * this.getRecipeQuantity,
-              price: this.getIngredients[ingredientId].price * (ingredient.ratio * this.getRecipeQuantity / 1000),
-              color: this.getIngredients[ingredientId].color,
-              viscosity: this.getIngredients[ingredientId].viscosity
+              r.push({
+                id: ingredient.id,
+                name: this.getIngredients[ingredientId].name,
+                ratio: ingredient.ratio,
+                quantity: ingredient.ratio * this.getRecipeQuantity,
+                price: this.getIngredients[ingredientId].price * (ingredient.ratio * this.getRecipeQuantity / 1000),
+                color: this.getIngredients[ingredientId].color,
+                viscosity: this.getIngredients[ingredientId].viscosity
+              })
             })
-          })
+          }
 
           // Min PG/VG ratio base
           r.unshift({

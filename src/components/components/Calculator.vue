@@ -25,15 +25,17 @@
 
     <hr>
 
-    <RecipeIngredients type="aroma">
-    </RecipeIngredients>
+    <template v-if="!mode.base">
+      <RecipeIngredients type="aroma">
+      </RecipeIngredients>
 
-    <hr>
+      <hr>
 
-    <RecipeIngredients type="additive">
-    </RecipeIngredients>
+      <RecipeIngredients type="additive">
+      </RecipeIngredients>
 
-    <hr>
+      <hr>
+    </template>
 
     <h3 class="page-subtitle">{{ $tc("ingredient", 2) }}</h3>
 

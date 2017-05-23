@@ -6,7 +6,7 @@
     <div class="list">
       <div class="list-label">Language</div>
       <label class="item multiple-lines">
-        <i class="item-primary">home</i>
+        <i class="item-primary">public</i>
         <div class="item-content">
           <q-select
             class="full-width"
@@ -19,20 +19,20 @@
 
       <div class="list-label">Currency</div>
       <label class="item multiple-lines">
-        <i class="item-primary">supervisor_account</i>
+        <i class="item-primary">euro_symbol</i>
         <div class="item-content">
           <q-select
             class="full-width"
             type="radio"
-            v-model="currentFoo"
-            :options="foo"
+            v-model="_currency"
+            :options="currencies"
           ></q-select>
         </div>
       </label>
-      <label class="item two-lines">
+      <label class="item two-lines" v-if="isCustomCurrency">
         <i class="item-primary">edit</i>
         <div class="item-content">
-          <input placeholder="Placeholder" class="full-width">
+          <input v-model="_currency" placeholder="Currency symbol" class="full-width">
         </div>
       </label>
     </div>
@@ -47,7 +47,7 @@
           <div>Use nicotine in calculator</div>
         </div>
         <div class="item-secondary">
-          <q-toggle v-model="checked"></q-toggle>
+          <q-toggle v-model="modeNicotine"></q-toggle>
         </div>
       </label>
       <label class="item two-lines">
@@ -56,7 +56,7 @@
           <div>Don't use aromas or additives</div>
         </div>
         <div class="item-secondary">
-          <q-toggle v-model="checked" class="purple"></q-toggle>
+          <q-toggle v-model="modeBase" class="purple"></q-toggle>
         </div>
       </label>
       <label class="item two-lines">
@@ -65,7 +65,7 @@
           <div>Show recipe price</div>
         </div>
         <div class="item-secondary">
-          <q-toggle v-model="checked" class="red"></q-toggle>
+          <q-toggle v-model="modePrice" class="red"></q-toggle>
         </div>
       </label>
       <label class="item two-lines">
@@ -74,7 +74,7 @@
           <div>Express small quantities in drops</div>
         </div>
         <div class="item-secondary">
-          <q-toggle v-model="checked" class="red"></q-toggle>
+          <q-toggle v-model="modeDrop" class="red"></q-toggle>
         </div>
       </label>
       <label class="item two-lines">
@@ -83,7 +83,7 @@
           <div>Draw the beaker</div>
         </div>
         <div class="item-secondary">
-          <q-toggle v-model="checked" class="red"></q-toggle>
+          <q-toggle v-model="modeBeaker" class="red"></q-toggle>
         </div>
       </label>
     </div>
@@ -138,34 +138,38 @@ export default {
   data () {
     return {
       checked: true,
-      currentFoo: 'goog',
-      foo: [
-        {
-          label: 'Google',
-          value: 'goog'
-        },
-        {
-          label: 'Facebook',
-          value: 'fb'
-        },
-        {
-          label: 'Github',
-          value: 'gh'
-        }
+      isCustomCurrency: false,
+      currencies: [
+        { label: 'dollar', value: '$' },
+        { label: 'euro', value: '€' },
+        { label: 'pound', value: '£' },
+        { label: 'other currency', value: '' }
       ]
     }
   },
   computed: {
     ...mapGetters([
       'language',
-      'currency'
+      'currency',
+      'mode'
     ]),
     locale: {
       get () { return this.language },
       set (value) {
-        console.log(value)
         this.$i18n.locale = value
         this.$store.commit('SET_LANGUAGE', value)
+      }
+    },
+    _currency: {
+      get () {
+        if (this.currency === '$' || this.currency === '€' || this.currency === '£') { this.isCustomCurrency = false }
+        else { this.isCustomCurrency = true }
+        return this.currency
+      },
+      set (value) {
+        this.$store.commit('SET_CURRENCY', value)
+        if (value === '') { this.isCustomCurrency = true }
+        else { this.isCustomCurrency = false }
       }
     },
     locales () {
@@ -179,6 +183,26 @@ export default {
         })
       })
       return langs
+    },
+    modeNicotine: {
+      get () { return this.mode.nicotine },
+      set (value) { this.$store.commit('SET_MODE', {mode: 'nicotine', isActive: value}) }
+    },
+    modeBase: {
+      get () { return this.mode.base },
+      set (value) { this.$store.commit('SET_MODE', {mode: 'base', isActive: value}) }
+    },
+    modePrice: {
+      get () { return this.mode.price },
+      set (value) { this.$store.commit('SET_MODE', {mode: 'price', isActive: value}) }
+    },
+    modeDrop: {
+      get () { return this.mode.drop },
+      set (value) { this.$store.commit('SET_MODE', {mode: 'drop', isActive: value}) }
+    },
+    modeBeaker: {
+      get () { return this.mode.beaker },
+      set (value) { this.$store.commit('SET_MODE', {mode: 'beaker', isActive: value}) }
     }
   },
 

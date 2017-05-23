@@ -1,7 +1,7 @@
 <template>
   <section>
 
-    <div class="beaker" style="height: 20rem;">
+    <div class="beaker" style="height: 20rem;" v-if="mode.beaker">
       <div
       v-for="(result, index) in results"
       :key="index"
@@ -17,7 +17,7 @@
           <th>{{ $t("name") }}</th>
           <th>{{ $t("ratio") }}</th>
           <th>{{ $t("quantity") }}</th>
-          <th>{{ $t("price") }}</th>
+          <th v-if="mode.price">{{ $t("price") }}</th>
         </tr>
       </thead>
       <tbody>
@@ -25,8 +25,15 @@
           <td v-bind:style="{ backgroundColor: result.color}">{{ index + 1 }}</td>
           <td>{{ result.name }} (ID:{{ result.id }})</td>
           <td>{{ roundNumber(result.ratio * 100) }}%</td>
-          <td>{{ roundNumber(result.quantity) }}mL</td>
-          <td>{{ roundNumber(result.price, 2) }}$</td>
+          <td v-if="result.quantity < 1 && mode.drop">
+            {{ roundNumber(result.quantity * result.viscosity) }} {{ $tc("drop", 2) }}
+          </td>
+          <td v-else>
+            {{ roundNumber(result.quantity) }}mL
+          </td>
+          <td v-if="mode.price">
+            {{ roundNumber(result.price, 2) }}{{ currency }}
+          </td>
         </tr>
       </tbody>
       <tfoot>
@@ -35,9 +42,9 @@
           <td>TOTAL ({{ results.length }} {{ $tc("ingredient", results.length) }})</td>
           <td>{{ roundNumber(totalRatio * 100) }}%</td>
           <td>{{ roundNumber(totalQuantity) }}mL</td>
-          <td>
-            {{ roundNumber(totalPrice, 2) }}$
-            ({{ roundNumber(totalPrice * 1000 / totalQuantity, 2) }}$/L)
+          <td v-if="mode.price">
+            {{ roundNumber(totalPrice, 2) }}{{ currency }}
+            ({{ roundNumber(totalPrice * 1000 / totalQuantity, 2) }}{{ currency }}/L)
           </td>
         </tr>
       </tfoot>
@@ -73,7 +80,10 @@
 
         'getRecipeQuantity',
         'getRecipePGVGRatio',
-        'getRecipeNicotine'
+        'getRecipeNicotine',
+
+        'mode',
+        'currency'
       ]),
       recipeIngredients () {
         // Merge aromas and additives
@@ -298,7 +308,8 @@
               ratio: ingredient.ratio,
               quantity: ingredient.ratio * this.getRecipeQuantity,
               price: this.getIngredients[ingredientId].price * (ingredient.ratio * this.getRecipeQuantity / 1000),
-              color: this.getIngredients[ingredientId].color
+              color: this.getIngredients[ingredientId].color,
+              viscosity: this.getIngredients[ingredientId].viscosity
             })
           })
 
@@ -309,7 +320,8 @@
             ratio: quantityPGVGRatioBaseMin / this.getRecipeQuantity,
             quantity: quantityPGVGRatioBaseMin,
             price: ingredientBaseMin.price * quantityPGVGRatioBaseMin / 1000,
-            color: ingredientBaseMin.color
+            color: ingredientBaseMin.color,
+            viscosity: ingredientBaseMin.viscosity
           })
 
           // Max PG/VG ratio base
@@ -319,7 +331,8 @@
             ratio: quantityPGVGRatioBaseMax / this.getRecipeQuantity,
             quantity: quantityPGVGRatioBaseMax,
             price: ingredientBaseMax.price * quantityPGVGRatioBaseMax / 1000,
-            color: ingredientBaseMax.color
+            color: ingredientBaseMax.color,
+            viscosity: ingredientBaseMax.viscosity
           })
 
           // Nicotine base
@@ -329,7 +342,8 @@
             ratio: nicotineBaseRatio,
             quantity: quantityBaseNicotine,
             price: ingredientBaseNicotine.price * quantityBaseNicotine / 1000,
-            color: ingredientBaseNicotine.color
+            color: ingredientBaseNicotine.color,
+            viscosity: ingredientBaseNicotine.viscosity
           })
         }
 

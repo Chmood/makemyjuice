@@ -9,14 +9,17 @@
   <h4 v-bind:style="{ backgroundColor: ingredient.color }">{{ ingredient.name }}</h4>
   <p>{{ ingredient.description }}</p>
 
-  <div>{{ $t("price") }}: {{ ingredient.price }}</div>
-  <div>{{ $t("viscosity") }}: {{ ingredient.viscosity }}</div>
-
   <div v-if="ingredient.PGVGRatio">
     {{ $t("PGVGRatio") }}: {{ ingredient.PGVGRatio }}
   </div>
   <div v-if="ingredient.nicotine">
     {{ $t("nicotine") }}: {{ ingredient.nicotine }}
+  </div>
+  <div v-if="ingredient.price && mode.price">
+    {{ $t("price") }}: {{ ingredient.price }}{{ currency }}/L
+  </div>
+  <div v-if="ingredient.viscosity && mode.drop">
+    {{ $t("viscosity") }}: {{ ingredient.viscosity }}
   </div>
 
   <button class="text-primary" @click="TOGGLE_INGREDIENT({ ingredient })">
@@ -52,6 +55,8 @@
     ],
     computed: {
       ...mapGetters([
+        'mode',
+        'currency'
       ])
     },
     methods: {

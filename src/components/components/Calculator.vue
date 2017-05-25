@@ -1,83 +1,88 @@
 <template>
-  <div class="">
+  <div class="calculator-layout">
 
-    <h3 class="page-subtitle">{{ $tc("recipe", 1) }}</h3>
+    <section class="section section--recipe">
 
-    <input v-model="name" class="full-width">
+      <h3 class="page-subtitle">{{ $tc("recipe", 1) }}</h3>
 
-    <h4> {{ $tc("base", 1) }} </h4>
+      <input v-model="name" class="full-width">
 
-    <div class="input-item">
-      <div class="input-item__label">
-        <label for="">{{ $t("quantity") }}</label>
-      </div>
-      <div class="input-item__input">
-        <template v-if="favoriteQuantity">
-          <input v-model.number="favorite.quantity" type="number" disabled="true">
-        </template>
-        <template v-else>
-          <input v-model.number="quantity" type="number">
-        </template>
-      </div>
-      <div class="input-item__unit">
-        <span class="input-unit">&nbsp;mL</span>
-      </div>
-      <div class="input-item__extra">
-        <q-toggle v-model="favoriteQuantity" class="purple"></q-toggle>
-      </div>
-    </div>
+      <h4> {{ $tc("base", 1) }} </h4>
 
-    <div class="input-item">
-      <div class="input-item__label">
-        <label for="">{{ $t("PGVGRatio") }}</label>
+      <div class="input-item">
+        <div class="input-item__label">
+          <label for="">{{ $t("quantity") }}</label>
+        </div>
+        <div class="input-item__input">
+          <template v-if="favoriteQuantity">
+            <input v-model.number="favorite.quantity" type="number" disabled="true">
+          </template>
+          <template v-else>
+            <input v-model.number="quantity" type="number">
+          </template>
+        </div>
+        <div class="input-item__unit">
+          <span class="input-unit">&nbsp;mL</span>
+        </div>
+        <div class="input-item__extra">
+          <q-toggle v-model="favoriteQuantity" class="purple"></q-toggle>
+        </div>
       </div>
-      <div class="input-item__input">
-        <template v-if="favoritePGVGRatio">
-          <input v-model.number="favorite.PGVGRatio" type="number" disabled="true">
-        </template>
-        <template v-else>
-          <input v-model.number="PGVGRatio" type="number">
-        </template>
-      </div>
-      <div class="input-item__unit">
-        <span class="input-unit">&nbsp;%</span>
-      </div>
-      <div class="input-item__extra">
-        <q-toggle v-model="favoritePGVGRatio" class="purple"></q-toggle>
-      </div>
-    </div>
 
-    <div class="input-item" v-if="mode.nicotine">
-      <div class="input-item__label">
-        <label for="">{{ $t("nicotine") }}</label>
+      <div class="input-item">
+        <div class="input-item__label">
+          <label for="">{{ $t("PGVGRatio") }}</label>
+        </div>
+        <div class="input-item__input">
+          <template v-if="favoritePGVGRatio">
+            <input v-model.number="favorite.PGVGRatio" type="number" disabled="true">
+          </template>
+          <template v-else>
+            <input v-model.number="PGVGRatio" type="number">
+          </template>
+        </div>
+        <div class="input-item__unit">
+          <span class="input-unit">&nbsp;%</span>
+        </div>
+        <div class="input-item__extra">
+          <q-toggle v-model="favoritePGVGRatio" class="purple"></q-toggle>
+        </div>
       </div>
-      <div class="input-item__input">
-        <template v-if="favoriteNicotine">
-          <input v-model.number="favorite.nicotine" type="number" disabled="true">
-        </template>
-        <template v-else>
-          <input v-model.number="nicotine" type="number">
-        </template>
+
+      <div class="input-item" v-if="mode.nicotine">
+        <div class="input-item__label">
+          <label for="">{{ $t("nicotine") }}</label>
+        </div>
+        <div class="input-item__input">
+          <template v-if="favoriteNicotine">
+            <input v-model.number="favorite.nicotine" type="number" disabled="true">
+          </template>
+          <template v-else>
+            <input v-model.number="nicotine" type="number">
+          </template>
+        </div>
+        <div class="input-item__unit">
+          <span class="input-unit">&nbsp;mg/mL</span>
+        </div>
+        <div class="input-item__extra">
+          <q-toggle v-model="favoriteNicotine" class="purple"></q-toggle>
+        </div>
       </div>
-      <div class="input-item__unit">
-        <span class="input-unit">&nbsp;mg/mL</span>
-      </div>
-      <div class="input-item__extra">
-        <q-toggle v-model="favoriteNicotine" class="purple"></q-toggle>
-      </div>
-    </div>
 
-    <template v-if="!mode.base">
-      <RecipeIngredients type="aroma">
-      </RecipeIngredients>
+      <template v-if="!mode.base">
+        <RecipeIngredients type="aroma">
+        </RecipeIngredients>
 
-      <RecipeIngredients type="additive">
-      </RecipeIngredients>
-    </template>
+        <RecipeIngredients type="additive">
+        </RecipeIngredients>
+      </template>
 
-    <h3 class="page-subtitle">{{ $tc("ingredient", 2) }}</h3>
+    </section>
 
-    <RecipeResults></RecipeResults>
+    <section>
+      <h3 class="page-subtitle">{{ $tc("ingredient", 2) }}</h3>
+      <RecipeResults></RecipeResults>
+    </section>
 
   </div>
 </template>
@@ -144,3 +149,23 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+  @import "../styles/main";
+
+  .calculator-layout {
+    @media (min-width: 80em) {
+      display: flex;
+
+      > * {
+        flex-grow: 1;
+
+        &.section--recipe {
+          margin-right: $gutter-double;
+        }
+      }
+    }
+  }
+
+</style>

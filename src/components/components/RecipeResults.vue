@@ -1,7 +1,7 @@
 <template>
-  <section>
 
-    <div class="beaker" style="height: 20rem;" v-if="mode.beaker">
+  <section class="results">
+    <div class="beaker" v-if="mode.beaker">
       <div
       v-for="(result, index) in results"
       :key="index"
@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <table v-if="results.length">
+    <table class="results-list" v-if="results.length">
       <!-- <thead>
         <tr>
           <th>#</th>
@@ -52,7 +52,7 @@
           <td>{{ roundNumber(totalRatio * 100) }}%</td>
           <td>{{ roundNumber(totalQuantity) }}mL</td>
           <td v-if="mode.price">
-            {{ roundNumber(totalPrice, 2) }}{{ currency }}
+            {{ roundNumber(totalPrice, 2) }}{{ currency }}<br>
             ({{ roundNumber(totalPrice * 1000 / totalQuantity, 2) }}{{ currency }}/L)
           </td>
         </tr>
@@ -62,8 +62,8 @@
     <div v-else>
       Recipe is NOT doable!
     </div>
-
   </section>
+
 </template>
 
 <script>
@@ -424,6 +424,16 @@
 
   @import "../styles/main";
 
+  .results {
+
+    @media (min-width: 40em) {
+      display: flex;
+      > * {
+        flex-shrink: 1;
+      }
+    }
+  }
+
   .beaker {
     margin: $gutter;
     display: flex;
@@ -433,35 +443,43 @@
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     overflow: hidden;
+    height: 20rem;
+
+    @media (min-width: 40em) {
+      height: auto;
+      flex-basis: 10%;
+      margin-left: 0;
+    }
 
     > * {
       // border: 2px solid red
     }
   }
 
-  article {
-    margin-bottom: $gutter;
-  }
-
-  table {
+  .results-list {
     width: 100%;
     font-size: 0.9rem;
-  }
 
-  td, th {
-    padding: $gutter;
-  }
-
-  thead {
-    text-transform: uppercase;
-
-    th {
-      text-align: left;
+    @media (min-width: 40em) {
+      width: 90%;
+      // flex-basis: 80%;
     }
-  }
 
-  tfoot {
-    font-weight: bold;
+    td, th {
+      padding: $gutter $gutter-half;
+    }
+
+    thead {
+      text-transform: uppercase;
+
+      th {
+        text-align: left;
+      }
+    }
+
+    tfoot {
+      font-weight: bold;
+    }
   }
 
 </style>

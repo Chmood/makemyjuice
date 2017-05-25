@@ -3,14 +3,14 @@ import * as types from '../mutation-types'
 // Initial state
 const state = {
   ingredients: [
-    {id: '0', active: true, type: 'base', name: 'Base 0mg PG100%', description: 'Zero nicotine basis, full PG', color: '#2f7', price: 10, viscosity: 25, PGVGRatio: 1.0, nicotine: 0},
-    {id: '7', active: true, type: 'base', name: 'Base 0mg PG20%/VG80%', description: 'Zero nicotine basis, mostly VG', color: '#08f', price: 15, viscosity: 25, PGVGRatio: 0.2, nicotine: 0},
-    {id: '1', active: true, type: 'base', name: 'Base 20mg PG50% VG50%', description: 'Half-half, strong nicotine', color: '#f88', price: 10, viscosity: 15, PGVGRatio: 0.5, nicotine: 20},
-    {id: '2', active: true, type: 'aroma', name: 'Lemon', description: 'Very mild italian lime', color: '#ff0', price: 400, viscosity: 25, PGVGRatio: 1.0},
-    {id: '3', active: true, type: 'aroma', name: 'Vanilla', description: 'My favourite custard aroma', color: '#fed', price: 500, viscosity: 25, PGVGRatio: 0.0},
-    {id: '5', active: true, type: 'aroma', name: 'Mint', description: 'Just a fresh mint!', color: '#cdf', price: 350, viscosity: 25, PGVGRatio: 1.0},
-    {id: '4', active: true, type: 'additive', name: 'Water', description: 'Pure water', color: '#aaa', price: 0, viscosity: 35},
-    {id: '6', active: true, type: 'additive', name: 'Alcohol', description: 'Non-modified 90° alcohol', color: '#afa', price: 20, viscosity: 35}
+    {id: '0', active: true, type: 'base', name: 'Base 0mg PG100%', description: 'Zero nicotine basis, full PG', color: '#009688', price: 10, viscosity: 25, PGVGRatio: 1.0, nicotine: 0},
+    {id: '7', active: true, type: 'base', name: 'Base 0mg PG20%/VG80%', description: 'Zero nicotine basis, mostly VG', color: '#f44336', price: 15, viscosity: 25, PGVGRatio: 0.2, nicotine: 0},
+    {id: '1', active: true, type: 'base', name: 'Base 20mg PG50% VG50%', description: 'Half-half, strong nicotine', color: '#e91e63', price: 10, viscosity: 15, PGVGRatio: 0.5, nicotine: 20},
+    {id: '2', active: true, type: 'aroma', name: 'Lemon', description: 'Very mild italian lime', color: '#ffc107', price: 400, viscosity: 25, PGVGRatio: 1.0},
+    {id: '3', active: true, type: 'aroma', name: 'Vanilla', description: 'My favourite custard aroma', color: '#ff5722', price: 500, viscosity: 25, PGVGRatio: 0.0},
+    {id: '5', active: true, type: 'aroma', name: 'Mint', description: 'Just a fresh mint!', color: '#607d8b', price: 350, viscosity: 25, PGVGRatio: 1.0},
+    {id: '4', active: true, type: 'additive', name: 'Water', description: 'Pure water', color: '#9e9e9e', price: 0, viscosity: 35},
+    {id: '6', active: true, type: 'additive', name: 'Alcohol', description: 'Non-modified 90° alcohol', color: '#cddc39', price: 20, viscosity: 35}
   ]
 }
 

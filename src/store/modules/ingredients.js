@@ -3,7 +3,7 @@ import * as types from '../mutation-types'
 // Initial state
 const state = {
   ingredients: [
-    {id: '0', active: true, type: 'base', name: 'Base 0mg PG100%', description: 'Zero nicotine basis, full PG', color: '#0f8', price: 10, viscosity: 25, PGVGRatio: 1.0, nicotine: 0},
+    {id: '0', active: true, type: 'base', name: 'Base 0mg PG100%', description: 'Zero nicotine basis, full PG', color: '#2f7', price: 10, viscosity: 25, PGVGRatio: 1.0, nicotine: 0},
     {id: '7', active: true, type: 'base', name: 'Base 0mg PG20%/VG80%', description: 'Zero nicotine basis, mostly VG', color: '#08f', price: 15, viscosity: 25, PGVGRatio: 0.2, nicotine: 0},
     {id: '1', active: true, type: 'base', name: 'Base 20mg PG50% VG50%', description: 'Half-half, strong nicotine', color: '#f88', price: 10, viscosity: 15, PGVGRatio: 0.5, nicotine: 20},
     {id: '2', active: true, type: 'aroma', name: 'Lemon', description: 'Very mild italian lime', color: '#ff0', price: 400, viscosity: 25, PGVGRatio: 1.0},

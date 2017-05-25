@@ -11,7 +11,7 @@
     </div>
 
     <table v-if="results.length">
-      <thead>
+      <!-- <thead>
         <tr>
           <th>#</th>
           <th>{{ $t("name") }}</th>
@@ -19,10 +19,19 @@
           <th>{{ $t("quantity") }}</th>
           <th v-if="mode.price">{{ $t("price") }}</th>
         </tr>
-      </thead>
+      </thead> -->
       <tbody>
         <tr v-for="(result, index) in results" :key="index">
-          <td v-bind:style="{ backgroundColor: result.color}">{{ index + 1 }}</td>
+          <td>
+            <router-link
+              :to="{ path: '/ingredient/' + result.id }"
+              tag="button"
+              class="circular small"
+              v-bind:style="{ backgroundColor: result.color, color: 'white'}"
+            >
+              {{ index + 1 }}
+            </router-link>
+          </td>
           <td>{{ result.name }} (ID:{{ result.id }})</td>
           <td>{{ roundNumber(result.ratio * 100) }}%</td>
           <td v-if="result.quantity < 1 && mode.drop">
@@ -416,8 +425,14 @@
   @import "../styles/main";
 
   .beaker {
+    margin: $gutter;
     display: flex;
     flex-direction: column;
+
+    box-shadow: 0 4px 0 4px #666;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    overflow: hidden;
 
     > * {
       // border: 2px solid red
@@ -430,6 +445,7 @@
 
   table {
     width: 100%;
+    font-size: 0.9rem;
   }
 
   td, th {

@@ -6,40 +6,57 @@
       <span v-if="type === 'additive'">{{ $tc("additive", 2) }}</span>
     </h4>
 
-    <article
+    <div
       v-for="(ingredient, index) in recipeIngredients"
       :key="ingredient.id"
+      class="input-item"
     >
-      <!-- [{{ index }}] -->
-      <q-select
-        type="list"
-        :value="ingredient.id" @input="setRecipeIngredientId(index, $event)"
-        :options="ingredientChoice"
-      ></q-select>
+      <div class="input-item__label">
+        <q-select
+          type="list"
+          :value="ingredient.id" @input="setRecipeIngredientId(index, $event)"
+          :options="ingredientChoice"
+        ></q-select>
+      </div>
+      <div class="input-item__input">
+        <input :value="ingredient.ratio * 100" @input="setRecipeIngredientRatio(index, $event)" type="number">
+      </div>
+      <div class="input-item__unit">
+        <span class="input-unit">&nbsp;%</span>
+      </div>
+      <div class="input-item__extra">
+        <button class="light circular small" @click="deleteRecipeIngredient(ingredient)">
+          <i>clear</i>
+          <!-- <span v-if="type === 'aroma'">{{ $tc("deleteAroma", 1) }}</span>
+          <span v-if="type === 'additive'">{{ $tc("deleteAdditive", 1) }}</span> -->
+        </button>
+      </div>
+    </div>
 
-      <input :value="ingredient.ratio * 100" @input="setRecipeIngredientRatio(index, $event)">%
+    <div class="input-item">
+      <div class="input-item__label">
+        <span>
+          {{ recipeIngredients.length }}
+          {{ $tc(type, recipeIngredients.length) }}
+        </span>
+      </div>
+      <div class="input-item__input">
+        <span>
+          {{ Math.round(ingredientsRatioSum * 100) }}
+        </span>
+      </div>
+      <div class="input-item__unit">
+        <span class="input-unit">&nbsp;%</span>
+      </div>
+      <div class="input-item__extra">
+        <button class="primary circular small" @click="addRecipeIngredient()">
+          <i>add</i>
+          <!-- <span v-if="type === 'aroma'">{{ $t("newAroma") }}</span>
+          <span v-if="type === 'additive'">{{ $t("newAdditive") }}</span> -->
+        </button>
+      </div>
+    </div>
 
-      <button class="light" @click="deleteRecipeIngredient(ingredient)">
-        <span v-if="type === 'aroma'">{{ $tc("deleteAroma", 1) }}</span>
-        <span v-if="type === 'additive'">{{ $tc("deleteAdditive", 1) }}</span>
-      </button>
-
-    </article>
-
-    <article>
-      <span>
-        {{ recipeIngredients.length }}
-        {{ $tc(type, recipeIngredients.length) }}
-      </span>
-      <span>
-        {{ Math.round(ingredientsRatioSum * 100) }}%
-      </span>
-    </article>
-
-    <button class="primary" @click="addRecipeIngredient()">
-      <span v-if="type === 'aroma'">{{ $t("newAroma") }}</span>
-      <span v-if="type === 'additive'">{{ $t("newAdditive") }}</span>
-    </button>
 
   </section>
 </template>
@@ -144,9 +161,5 @@
 <style lang="scss" scoped>
 
   @import "../styles/main";
-
-  article {
-    margin-bottom: $gutter;
-  }
 
 </style>

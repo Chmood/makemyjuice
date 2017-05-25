@@ -107,14 +107,14 @@
     </q-drawer>
 
     <!-- FOOTER -->
-    <div slot="footer" class="toolbar">
+    <!-- <div slot="footer" class="toolbar">
       <div class="auto flex justify-center within-iframe-hide">
         MakeMyJuice - Made with ❤ by&nbsp;<a href="https://twitter.com/nicolasgiethlen">Nicolas Giethlen</a>
       </div>
       <q-toolbar-title :padding="0" class="within-iframe-only">
         Footer in iframe
       </q-toolbar-title>
-    </div>
+    </div> -->
 
   </q-layout>
 </template>
@@ -248,6 +248,62 @@ export default {
   h4 {
     font-size: 1.2rem;
     font-weight: 500;
+    text-transform: capitalize;
+  }
+
+  // Input items
+
+  .input-item {
+    display: flex;
+    margin-bottom: $gutter * 1.5;
+
+    > * {
+      flex-shrink: 1;
+      padding-top: $gutter-half;
+      padding-bottom: $gutter-half;
+    }
+  }
+
+  .input-item__label {//background-color: gold;
+    flex-basis: 40%;
+
+    > * {
+      width: 100%;
+    }
+  }
+
+  .input-item__input {
+    // flex-grow: 1;
+    flex-basis: 30%;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    > * {
+      display: block;
+      width: 100%;
+      text-align: right;
+      color: #333;
+    }
+
+    > input {//background-color: tomato;
+      font-size: 1.25rem;
+      font-weight: 900;
+    }
+  }
+
+  .input-item__unit {//background-color: gray;
+    padding-top: $gutter-half * 1.5;
+    flex-basis: 15%;
+    // font-size: $fontsize-base;
+    font-size: 0.9rem;
+  }
+
+  .input-item__extra {//background-color: tomato;
+    flex-basis: 15%;
+    // flex-basis: 50px;
+  }
+
+  label {
     text-transform: capitalize;
   }
 

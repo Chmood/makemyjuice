@@ -7,38 +7,65 @@
 
     <h4> {{ $tc("base", 1) }} </h4>
 
-    <p>
-      {{ $t("quantity") }}
-      <template v-if="favoriteQuantity">
-        <input v-model.number="favorite.quantity" type="number" disabled="true">&nbsp;mL
-      </template>
-      <template v-else>
-        <input v-model.number="quantity" type="number">&nbsp;mL
-      </template>
-      <q-toggle v-model="favoriteQuantity" class="purple"></q-toggle>
-    </p>
+    <div class="input-item">
+      <div class="input-item__label">
+        <label for="">{{ $t("quantity") }}</label>
+      </div>
+      <div class="input-item__input">
+        <template v-if="favoriteQuantity">
+          <input v-model.number="favorite.quantity" type="number" disabled="true">
+        </template>
+        <template v-else>
+          <input v-model.number="quantity" type="number">
+        </template>
+      </div>
+      <div class="input-item__unit">
+        <span class="input-unit">&nbsp;mL</span>
+      </div>
+      <div class="input-item__extra">
+        <q-toggle v-model="favoriteQuantity" class="purple"></q-toggle>
+      </div>
+    </div>
 
-    <p>
-      {{ $t("PGVGRatio") }}
-      <template v-if="favoritePGVGRatio">
-        <input v-model.number="favorite.PGVGRatio" type="number" disabled="true">&nbsp;%
-      </template>
-      <template v-else>
-        <input v-model.number="PGVGRatio" type="number">&nbsp;%
-      </template>
-      <q-toggle v-model="favoritePGVGRatio" class="purple"></q-toggle>
-    </p>
+    <div class="input-item">
+      <div class="input-item__label">
+        <label for="">{{ $t("PGVGRatio") }}</label>
+      </div>
+      <div class="input-item__input">
+        <template v-if="favoritePGVGRatio">
+          <input v-model.number="favorite.PGVGRatio" type="number" disabled="true">
+        </template>
+        <template v-else>
+          <input v-model.number="PGVGRatio" type="number">
+        </template>
+      </div>
+      <div class="input-item__unit">
+        <span class="input-unit">&nbsp;%</span>
+      </div>
+      <div class="input-item__extra">
+        <q-toggle v-model="favoritePGVGRatio" class="purple"></q-toggle>
+      </div>
+    </div>
 
-    <p v-if="mode.nicotine">
-      {{ $t("nicotine") }}
-      <template v-if="favoriteNicotine">
-        <input v-model.number="favorite.nicotine" type="number" disabled="true">&nbsp;mg/mL
-      </template>
-      <template v-else>
-        <input v-model.number="nicotine" type="number">&nbsp;mg/mL
-      </template>
-      <q-toggle v-model="favoriteNicotine" class="purple"></q-toggle>
-    </p>
+    <div class="input-item" v-if="mode.nicotine">
+      <div class="input-item__label">
+        <label for="">{{ $t("nicotine") }}</label>
+      </div>
+      <div class="input-item__input">
+        <template v-if="favoriteNicotine">
+          <input v-model.number="favorite.nicotine" type="number" disabled="true">
+        </template>
+        <template v-else>
+          <input v-model.number="nicotine" type="number">
+        </template>
+      </div>
+      <div class="input-item__unit">
+        <span class="input-unit">&nbsp;mg/mL</span>
+      </div>
+      <div class="input-item__extra">
+        <q-toggle v-model="favoriteNicotine" class="purple"></q-toggle>
+      </div>
+    </div>
 
     <template v-if="!mode.base">
       <RecipeIngredients type="aroma">

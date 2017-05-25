@@ -221,7 +221,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+  // not scoped for cascading into children
 
   @import "styles/main";
 
@@ -231,4 +232,23 @@ export default {
       font-weight: bold;
     }
   }
+
+  h2 {
+    margin-top: 0;
+    font-size: 2rem;
+    text-transform: capitalize;
+    font-weight: 300;
+  }
+  h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #666;
+  }
+  h4 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+
 </style>

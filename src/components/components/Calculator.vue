@@ -3,13 +3,9 @@
 
     <h3 class="page-subtitle">{{ $tc("recipe", 1) }}</h3>
 
-    <input v-model="name">
+    <input v-model="name" class="full-width">
 
-    <hr>
-
-    <h4>
-      {{ $tc("base", 1) }}
-    </h4>
+    <h4> {{ $tc("base", 1) }} </h4>
 
     <p>
       {{ $t("quantity") }}
@@ -44,18 +40,12 @@
       <q-toggle v-model="favoriteNicotine" class="purple"></q-toggle>
     </p>
 
-    <hr>
-
     <template v-if="!mode.base">
       <RecipeIngredients type="aroma">
       </RecipeIngredients>
 
-      <hr>
-
       <RecipeIngredients type="additive">
       </RecipeIngredients>
-
-      <hr>
     </template>
 
     <h3 class="page-subtitle">{{ $tc("ingredient", 2) }}</h3>

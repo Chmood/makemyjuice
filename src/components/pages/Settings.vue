@@ -3,6 +3,8 @@
 
     <h2 class="page-title">{{ $tc("setting", 2) }}</h2>
 
+    <h3>Localisation</h3>
+
     <div class="list">
       <div class="list-label">Language</div>
       <label class="item multiple-lines">
@@ -37,7 +39,7 @@
       </label>
     </div>
 
-    <h5>Modes</h5>
+    <h3>Modes</h3>
 
     <div class="list">
       <!-- <div class="list-label">Calculator modes</div> -->
@@ -88,7 +90,7 @@
       </label>
     </div>
 
-    <h5>Favourite recipe parameters</h5>
+    <h3>Favourite recipe parameters</h3>
 
     <div class="list">
       <label class="item two-lines">

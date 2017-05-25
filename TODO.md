@@ -22,6 +22,7 @@
 
 * UI
 
+  * color picker component
   * mousewheel handling
   * sliders components for PG/VG ratios
 

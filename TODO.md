@@ -1,5 +1,11 @@
 ### FEATURES
 
+* Bugs
+
+* fix custom currency mode
+* fix prev/nest links in ingredient page
+* format numbers (mostly rounding, to avoid jerk in 2-way inputs)
+
 * i18n
 
   * split language file
@@ -9,8 +15,6 @@
 
   * allow creation and edition of ingredients
   * allow the user to save his recipes (+ import/export)
-  * fix custom currency mode
-  * add favourite params mode
 
 * Formula
 
@@ -18,7 +22,6 @@
 
 * UI
 
-  * format numbers (mostly rounding, to avoid jerk in 2-way inputs)
   * mousewheel handling
   * sliders components for PG/VG ratios
 

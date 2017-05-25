@@ -26,18 +26,10 @@ export default new VueRouter({
       path: '/', // Default route
       component: load('Index'),
       children: [ // Sub-routes
-        {
-          path: '', // default subroute
-          component: load('pages/Home')
-        },
-        {
-          path: 'ingredients',
-          component: load('pages/Ingredients')
-        },
-        {
-          path: 'settings',
-          component: load('pages/Settings')
-        }
+        { path: '', component: load('pages/Home') },  // default subroute
+        { path: 'ingredients', component: load('pages/Ingredients') },
+        { path: 'ingredient/:id', component: load('pages/Ingredient') },
+        { path: 'settings', component: load('pages/Settings') }
       ]
     },
     // { path: '/foo', component: load('Foo') }, // example simple route

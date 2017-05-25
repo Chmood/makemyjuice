@@ -21,6 +21,8 @@ export default {
     additive: 'additive | additives',
     deleteAdditive: 'delete additive | delete additives',
     newAdditive: 'new additive',
+    type: 'type',
+    description: 'description',
     price: 'price',
     viscosity: 'viscosity',
     drop: 'drop | drops',
@@ -31,13 +33,16 @@ export default {
     all: 'all',
     active: 'active',
     inactive: 'inactive',
+    previous: 'previous',
+    next: 'next',
 
     cancel: 'cancel',
     delete: 'delete',
     activate: 'activate',
     desactivate: 'desactivate',
     add: 'add',
-    edit: 'edit'
+    edit: 'edit',
+    save: 'save'
   },
 
   fr: {
@@ -62,6 +67,8 @@ export default {
     additive: 'additif | additifs',
     deleteAdditive: 'supprimer l\'additif | supprimer les additifs',
     newAdditive: 'nouvel additif',
+    type: 'type',
+    description: 'description',
     price: 'prix',
     viscosity: 'viscosité',
     drop: 'goutte | gouttes',
@@ -72,12 +79,15 @@ export default {
     all: 'tous',
     active: 'actifs',
     inactive: 'inactifs',
+    previous: 'précédent',
+    next: 'suivant',
 
     cancel: 'annuler',
     delete: 'effacer',
     activate: 'activer',
     desactivate: 'désactiver',
     add: 'ajouter',
-    edit: 'modifier'
+    edit: 'modifier',
+    save: 'sauver'
   }
 }

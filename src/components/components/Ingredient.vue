@@ -33,10 +33,13 @@
     {{ $t("delete") }}
   </button>
 
-  <button class="text-dark" @click="">
-    <i class="on-left">edit</i>
-    {{ $t("edit") }}
-  </button>
+  <router-link
+    :to="{ path: '/ingredient/' + ingredient.id }"
+    tag="button"
+    class="light"
+  >
+    {{ $t("edit") }} #{{ ingredient.id }}
+  </router-link>
 
   </article>
 </template>

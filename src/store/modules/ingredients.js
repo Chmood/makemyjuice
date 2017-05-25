@@ -29,6 +29,10 @@ const mutations = {
   },
   [types.FETCH_INGREDIENTS] (state, { ingredients }) {
     state.ingredients = ingredients
+  },
+  [types.SET_INGREDIENT] (state, { ingredient }) {
+    const id = state.ingredients.findIndex(i => i.id === ingredient.id)
+    state.ingredients[id] = ingredient
   }
 }
 

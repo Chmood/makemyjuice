@@ -34,35 +34,45 @@
       ></ingredient>
     </div>
 
-    <button class="primary" @click="newIngredient('base')">
-      NEW BASE
-    </button>
+    <div class="center-btns">
+      <button class="circular primary small" @click="newIngredient('base')">
+        <i>add</i>
+      </button>
+    </div>
 
     <h3>{{ $tc("aroma", 2) }} ({{ aromas.length }})</h3>
 
-    <ingredient
-      v-if="aromas"
-      v-for="ingredient in aromas"
-      :key="ingredient.id"
-      :ingredient="ingredient"
-    ></ingredient>
+    <div class="ingredients--aromas">
+      <ingredient
+        v-if="aromas"
+        v-for="ingredient in aromas"
+        :key="ingredient.id"
+        :ingredient="ingredient"
+      ></ingredient>
+    </div>
 
-    <button class="primary" @click="newIngredient('aroma')">
-      NEW AROMA
-    </button>
+    <div class="center-btns">
+      <button class="circular primary small" @click="newIngredient('aroma')">
+        <i>add</i>
+      </button>
+    </div>
 
     <h3>{{ $tc("additive", 2) }} ({{ additives.length }})</h3>
 
-    <ingredient
-      v-if="additives"
-      v-for="ingredient in additives"
-      :key="ingredient.id"
-      :ingredient="ingredient"
-    ></ingredient>
+    <div class="ingredients--additives">
+      <ingredient
+        v-if="additives"
+        v-for="ingredient in additives"
+        :key="ingredient.id"
+        :ingredient="ingredient"
+      ></ingredient>
+    </div>
 
-    <button class="primary" @click="newIngredient('additive')">
-      NEW ADDITIVE
-    </button>
+    <div class="center-btns">
+      <button class="circular primary small" @click="newIngredient('additive')">
+        <i>add</i>
+      </button>
+    </div>
 
   </section>
 </template>
@@ -157,5 +167,31 @@
 <style lang="scss" scoped>
 
   @import "../styles/main";
+
+  .ingredients--bases,
+  .ingredients--aromas,
+  .ingredients--additives {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: -$gutter-half;
+    margin-bottom: $gutter;
+
+    > * {
+      flex-basis: 100%;
+      margin: $gutter-half;
+
+      @media (min-width: 45em) {
+        flex-basis: calc(50% - 1rem); // OMG evil magic value!
+      }
+      @media (min-width: 75em) {
+        flex-basis: calc(33.33% - 1rem); // OMG evil magic value!
+      }
+    }
+  }
+
+  .center-btns {
+    text-align: center;
+  }
 
 </style>

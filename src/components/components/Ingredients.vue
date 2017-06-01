@@ -19,7 +19,6 @@
           {{ key === 'all' ? 'ALL' : '' }}
           {{ key === 'inactive' ? 'INACTIVE' : '' }}
           {{ key === 'active' ? 'ACTIVE' : '' }}
-          <!-- &nbsp;({{ nMessages[key] }}) -->
         </div>
       </q-tab>
     </q-tabs>
@@ -35,8 +34,7 @@
       ></ingredient>
     </div>
 
-    <button class="text-primary" @click="">
-      <i class="on-left">plus</i>
+    <button class="primary" @click="newIngredient('base')">
       NEW BASE
     </button>
 
@@ -49,8 +47,7 @@
       :ingredient="ingredient"
     ></ingredient>
 
-    <button class="text-primary" @click="">
-      <i class="on-left">plus</i>
+    <button class="primary" @click="newIngredient('aroma')">
       NEW AROMA
     </button>
 
@@ -63,8 +60,7 @@
       :ingredient="ingredient"
     ></ingredient>
 
-    <button class="text-primary" @click="">
-      <i class="on-left">plus</i>
+    <button class="primary" @click="newIngredient('additive')">
       NEW ADDITIVE
     </button>
 
@@ -74,7 +70,6 @@
 <script>
   import { mapGetters, mapMutations, mapActions } from 'vuex'
   import Ingredient from './Ingredient.vue'
-  // import { Loading } from 'quasar'
 
   const filters = {
     all: messages => messages,
@@ -123,8 +118,32 @@
       ...mapActions([
       ]),
       ...mapMutations([
-        'TOGGLE_ALL_INGREDIENTS'
-      ])
+      ]),
+      getFreeId () {
+        let id = 1
+        while (this.getIngredients.findIndex(i => i.id === id.toString()) !== -1) {
+          id++
+        }
+        return id.toString()
+      },
+      newIngredient (type) {
+        const id = this.getFreeId()
+        const ingredient = {
+          id: id,
+          active: true,
+          type: type,
+          name: '',
+          description: '',
+          color: '#888',
+          price: 0,
+          viscosity: 25
+        }
+        if (type === 'aroma' || type === 'base') { ingredient.PGVGRatio = 1.0 }
+        if (type === 'base') { ingredient.nicotine = 0 }
+
+        this.$store.commit('ADD_INGREDIENT', { ingredient })
+        this.$router.push('ingredient/' + id)
+      }
     },
     mounted () {
       // Set custom visibility filter

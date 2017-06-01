@@ -28,7 +28,7 @@ export default new VueRouter({
       children: [ // Sub-routes
         { path: '', component: load('pages/Home') },  // default subroute
         { path: 'ingredients', component: load('pages/Ingredients') },
-        { path: 'ingredient/:id', component: load('pages/Ingredient') },
+        { path: 'ingredient/:mode/:id', component: load('pages/Ingredient'), props: true },
         { path: 'settings', component: load('pages/Settings') }
       ]
     },

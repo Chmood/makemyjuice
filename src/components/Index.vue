@@ -303,8 +303,17 @@ export default {
     // flex-basis: 50px;
   }
 
-  label {
-    text-transform: capitalize;
+  .item > .item-secondary {
+    font-size: 0.9rem;
+  }
+
+  // Menu items
+  .drawer.left-side {
+    .item-content {
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
   }
 
 </style>

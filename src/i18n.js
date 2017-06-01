@@ -13,6 +13,7 @@ export default {
     offline: 'offline',
 
     name: 'name',
+    color: 'color',
     quantity: 'quantity',
     base: 'base | bases',
     aroma: 'aroma | aromas',
@@ -59,6 +60,7 @@ export default {
     offline: 'hors-ligne',
 
     name: 'nom',
+    color: 'couleur',
     quantity: 'quantité',
     base: 'base | bases',
     aroma: 'arôme | arômes',

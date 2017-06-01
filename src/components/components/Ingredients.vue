@@ -142,7 +142,7 @@
         if (type === 'base') { ingredient.nicotine = 0 }
 
         this.$store.commit('ADD_INGREDIENT', { ingredient })
-        this.$router.push('ingredient/' + id)
+        this.$router.push('ingredient/create/' + id)
       }
     },
     mounted () {

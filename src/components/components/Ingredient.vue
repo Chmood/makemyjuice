@@ -34,7 +34,7 @@
   </button>
 
   <router-link
-    :to="{ path: '/ingredient/' + ingredient.id }"
+    :to="{ path: '/ingredient/edit/' + ingredient.id }"
     tag="button"
     class="light"
   >

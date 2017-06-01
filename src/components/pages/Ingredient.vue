@@ -1,7 +1,9 @@
 <template>
   <div class="">
 
-    <h2 class="page-title">{{ $tc("ingredient", 2) }} - ID {{ $route.params.id }}</h2>
+    <h2 class="page-title" :style="{backgroundColor: ingredient.color}">
+      {{ $tc("ingredient", 1) }} - {{ mode }} - ID {{ $route.params.id }}
+    </h2>
 
     <router-link :to="{ path: '/ingredient/' + idPrevious }">
       {{ $t("previous") }}
@@ -29,6 +31,14 @@
         <i class="item-primary">public</i>
         <div class="item-content">
           <input v-model="ingredient.name" type="text" class="full-width">
+        </div>
+      </label>
+
+      <div class="list-label">{{ $t("color") }}</div>
+      <label class="item multiple-lines">
+        <i class="item-primary">color</i>
+        <div class="item-content">
+          <input v-model="ingredient.color" type="text" class="full-width">
         </div>
       </label>
 
@@ -81,13 +91,16 @@
     <button class="primary" @click="saveIngredient()">
       {{ $t("save") }}
     </button>
-    <router-link
+    <button class="light" @click="cancelIngredient()">
+      {{ $t("cancel") }}
+    </button>
+    <!-- <router-link
       :to="{ path: '/ingredients' }"
       tag="button"
       class="light"
     >
       {{ $t("cancel") }}
-    </router-link>
+    </router-link> -->
 
   </div>
 </template>
@@ -96,6 +109,10 @@
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
+  props: [
+    'id',
+    'mode'
+  ],
   components: {
   },
   data () {
@@ -131,13 +148,20 @@ export default {
     ...mapMutations([
     ]),
     cloneIngredient () {
-      const id = this.getIngredients.findIndex(i => i.id === this.$route.params.id)
+      // const id = this.getIngredients.findIndex(i => i.id === this.$route.params.id)
+      const realId = this.getIngredients.findIndex(i => i.id === this.id)
 
       // hard copy
-      this.ingredient = Object.assign({}, this.getIngredients[id])
+      this.ingredient = Object.assign({}, this.getIngredients[realId])
     },
     saveIngredient () {
       this.$store.commit('SET_INGREDIENT', {ingredient: this.ingredient})
+    },
+    cancelIngredient () {
+      if (this.mode === 'create') {
+        this.$store.commit('DELETE_INGREDIENT', {ingredient: this.ingredient})
+      }
+      this.$router.go(-1)
     }
   },
 

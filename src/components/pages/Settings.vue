@@ -49,7 +49,7 @@
           <div>Use nicotine in calculator</div>
         </div>
         <div class="item-secondary">
-          <q-toggle v-model="modeNicotine"></q-toggle>
+          <q-toggle v-model="modeNicotine" class="primary"></q-toggle>
         </div>
       </label>
       <label class="item two-lines">
@@ -58,7 +58,7 @@
           <div>Don't use aromas or additives</div>
         </div>
         <div class="item-secondary">
-          <q-toggle v-model="modeBase" class="purple"></q-toggle>
+          <q-toggle v-model="modeBase" class="primary"></q-toggle>
         </div>
       </label>
       <label class="item two-lines">
@@ -67,7 +67,7 @@
           <div>Show recipe and ingredients price</div>
         </div>
         <div class="item-secondary">
-          <q-toggle v-model="modePrice" class="red"></q-toggle>
+          <q-toggle v-model="modePrice" class="primary"></q-toggle>
         </div>
       </label>
       <label class="item two-lines">
@@ -76,7 +76,7 @@
           <div>Express small quantities in drops</div>
         </div>
         <div class="item-secondary">
-          <q-toggle v-model="modeDrop" class="red"></q-toggle>
+          <q-toggle v-model="modeDrop" class="primary"></q-toggle>
         </div>
       </label>
       <label class="item two-lines">
@@ -85,7 +85,7 @@
           <div>Draw the beaker</div>
         </div>
         <div class="item-secondary">
-          <q-toggle v-model="modeBeaker" class="red"></q-toggle>
+          <q-toggle v-model="modeBeaker" class="primary"></q-toggle>
         </div>
       </label>
     </div>
@@ -99,7 +99,7 @@
           <div>Use favorite settings</div>
         </div>
         <div class="item-secondary">
-          <q-toggle v-model="modeFavorite" class="red"></q-toggle>
+          <q-toggle v-model="modeFavorite" class="primary"></q-toggle>
         </div>
       </label>
       <template v-if="mode.favorite">

@@ -108,9 +108,9 @@
 
   .ingredient-item {
     margin-bottom: $gutter;
-    border: 1px solid #888;
-    // background-color: #333;
-    // color: #ddd;
+    border: 1px solid #222;
+    background-color: white;
+    color: #333;
     display: flex;
     flex-direction: column;
   }

@@ -244,6 +244,10 @@ export default {
     font-weight: bold;
     text-transform: uppercase;
     color: #666;
+
+    &::after {
+      content: ' //'
+    }
   }
   h4 {
     font-size: 1.2rem;
@@ -315,5 +319,35 @@ export default {
       }
     }
   }
+
+  // LAYOUT COLORS OVERRIDE
+
+  .layout-padding {
+    min-height: calc(100vh - 50px);
+    background-color: #222;
+    background-image:
+      repeating-linear-gradient(97deg, rgba(0,0,0,0), rgba(0,0,0,0) 1rem, rgba(0,0,0,0.25) 1rem, rgba(0,0,0,0.25) 2rem),
+      radial-gradient(#444 0%, #111 100%)
+      ;
+    color: #ddd;
+  }
+
+  .drawer-content,
+  .drawer-content .list {
+    background-color: #111;
+    color: #ddd;
+  }
+
+  .input-items,
+  .list {
+    background-color: white;
+    color: #333;
+  }
+
+  .input-items {
+    padding: $gutter;
+    margin-bottom: $gutter;
+  }
+
 
 </style>

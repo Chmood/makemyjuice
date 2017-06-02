@@ -5,76 +5,87 @@
 
       <h3 class="page-subtitle">{{ $tc("recipe", 1) }}</h3>
 
-      <input v-model="name" class="full-width">
+      <input v-model="name" class="full-width recipe-input-name">
 
       <h4> {{ $tc("base", 1) }} </h4>
 
-      <div class="input-item">
-        <div class="input-item__label">
-          <label for="">{{ $t("quantity") }}</label>
+      <section class="input-items">
+        <div class="input-item">
+          <div class="input-item__label">
+            <label for="">{{ $t("quantity") }}</label>
+          </div>
+          <div class="input-item__input">
+            <template v-if="favoriteQuantity">
+              <input v-model.number="favorite.quantity" type="number" disabled="true">
+            </template>
+            <template v-else>
+              <input v-model.number="quantity" type="number">
+            </template>
+          </div>
+          <div class="input-item__unit">
+            <span class="input-unit">&nbsp;mL</span>
+          </div>
+          <div class="input-item__extra">
+            <q-toggle v-model="favoriteQuantity" class="primary"></q-toggle>
+          </div>
         </div>
-        <div class="input-item__input">
-          <template v-if="favoriteQuantity">
-            <input v-model.number="favorite.quantity" type="number" disabled="true">
-          </template>
-          <template v-else>
-            <input v-model.number="quantity" type="number">
-          </template>
-        </div>
-        <div class="input-item__unit">
-          <span class="input-unit">&nbsp;mL</span>
-        </div>
-        <div class="input-item__extra">
-          <q-toggle v-model="favoriteQuantity" class="purple"></q-toggle>
-        </div>
-      </div>
 
-      <div class="input-item">
-        <div class="input-item__label">
-          <label for="">{{ $t("PGVGRatio") }}</label>
+        <div class="input-item">
+          <div class="input-item__label">
+            <label for="">{{ $t("PGVGRatio") }}</label>
+          </div>
+          <div class="input-item__input">
+            <template v-if="favoritePGVGRatio">
+              <input v-model.number="favorite.PGVGRatio" type="number" disabled="true">
+            </template>
+            <template v-else>
+              <input v-model.number="PGVGRatio" type="number">
+            </template>
+          </div>
+          <div class="input-item__unit">
+            <span class="input-unit">&nbsp;%</span>
+          </div>
+          <div class="input-item__extra">
+            <q-toggle v-model="favoritePGVGRatio" class="primary"></q-toggle>
+          </div>
         </div>
-        <div class="input-item__input">
-          <template v-if="favoritePGVGRatio">
-            <input v-model.number="favorite.PGVGRatio" type="number" disabled="true">
-          </template>
-          <template v-else>
-            <input v-model.number="PGVGRatio" type="number">
-          </template>
-        </div>
-        <div class="input-item__unit">
-          <span class="input-unit">&nbsp;%</span>
-        </div>
-        <div class="input-item__extra">
-          <q-toggle v-model="favoritePGVGRatio" class="purple"></q-toggle>
-        </div>
-      </div>
 
-      <div class="input-item" v-if="mode.nicotine">
-        <div class="input-item__label">
-          <label for="">{{ $t("nicotine") }}</label>
+        <div class="input-item" v-if="mode.nicotine">
+          <div class="input-item__label">
+            <label for="">{{ $t("nicotine") }}</label>
+          </div>
+          <div class="input-item__input">
+            <template v-if="favoriteNicotine">
+              <input v-model.number="favorite.nicotine" type="number" disabled="true">
+            </template>
+            <template v-else>
+              <input v-model.number="nicotine" type="number">
+            </template>
+          </div>
+          <div class="input-item__unit">
+            <span class="input-unit">&nbsp;mg/mL</span>
+          </div>
+          <div class="input-item__extra">
+            <q-toggle v-model="favoriteNicotine" class="primary"></q-toggle>
+          </div>
         </div>
-        <div class="input-item__input">
-          <template v-if="favoriteNicotine">
-            <input v-model.number="favorite.nicotine" type="number" disabled="true">
-          </template>
-          <template v-else>
-            <input v-model.number="nicotine" type="number">
-          </template>
-        </div>
-        <div class="input-item__unit">
-          <span class="input-unit">&nbsp;mg/mL</span>
-        </div>
-        <div class="input-item__extra">
-          <q-toggle v-model="favoriteNicotine" class="purple"></q-toggle>
-        </div>
-      </div>
+      </section>
 
       <template v-if="!mode.base">
-        <RecipeIngredients type="aroma">
-        </RecipeIngredients>
 
-        <RecipeIngredients type="additive">
-        </RecipeIngredients>
+        <h4> {{ $tc("aroma", 2) }} </h4>
+
+        <section class="input-items">
+          <RecipeIngredients type="aroma">
+          </RecipeIngredients>
+        </section>
+
+        <h4> {{ $tc("additive", 2) }} </h4>
+
+        <section class="input-items">
+          <RecipeIngredients type="additive">
+          </RecipeIngredients>
+        </section>
       </template>
 
     </section>
@@ -166,6 +177,15 @@ export default {
         }
       }
     }
+  }
+
+  .recipe-input-name {
+    color: white;
+    font-size: 1.5rem;
+  }
+
+  .results {
+    background-color: rgba(0,0,0,0.33);
   }
 
 </style>

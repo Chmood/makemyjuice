@@ -1,11 +1,6 @@
 <template>
   <section>
 
-    <h4>
-      <span v-if="type === 'aroma'">{{ $tc("aroma", 2) }}</span>
-      <span v-if="type === 'additive'">{{ $tc("additive", 2) }}</span>
-    </h4>
-
     <div
       v-for="(ingredient, index) in recipeIngredients"
       :key="ingredient.id"

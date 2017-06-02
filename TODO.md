@@ -3,7 +3,7 @@
 ## Bugs
 
 * ingredient edition: save btn works but doesn't redirect
-* calculator: favorite PG/VG ratio seems broken
+* calculator: favorite PG/VG ratio seems broken???
 * desactivated/deleted ingredients put calculator in error
 * custom currency mode
 * prev/next links in ingredient page
@@ -11,9 +11,8 @@
 
 ## Features
 
-* add recipe description (and tags later, and ingredients too)
+* add recipe description (and tags later, for ingredients too)
 * manual flush of store/storage/user datas
-* allow creation and edition of ingredients
 * allow the user to save his recipes (+ import/export)
 
 ## Formula
@@ -23,7 +22,7 @@
 ## UI
 
 * color picker component
-* mousewheel handling
+* mousewheel handling?
 * sliders components for PG/VG ratios
 * nicer beaker!
 

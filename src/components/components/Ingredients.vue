@@ -34,7 +34,7 @@
       ></ingredient>
     </div>
 
-    <div class="center-btns">
+    <div class="center">
       <button class="circular primary small" @click="newIngredient('base')">
         <i>add</i>
       </button>
@@ -51,7 +51,7 @@
       ></ingredient>
     </div>
 
-    <div class="center-btns">
+    <div class="center">
       <button class="circular primary small" @click="newIngredient('aroma')">
         <i>add</i>
       </button>
@@ -68,7 +68,7 @@
       ></ingredient>
     </div>
 
-    <div class="center-btns">
+    <div class="center">
       <button class="circular primary small" @click="newIngredient('additive')">
         <i>add</i>
       </button>
@@ -188,10 +188,6 @@
         flex-basis: calc(33.33% - 1rem); // OMG evil magic value!
       }
     }
-  }
-
-  .center-btns {
-    text-align: center;
   }
 
 </style>

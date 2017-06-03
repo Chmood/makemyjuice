@@ -226,6 +226,10 @@ export default {
 
   @import "styles/main";
 
+  .center {
+    text-align: center;
+  }
+
   .label {
     &.bg-primary {
       color: white !important; // OMFG TODO

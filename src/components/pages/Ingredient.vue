@@ -88,19 +88,23 @@
       </label>
     </div>
 
-    <button class="primary" @click="saveIngredient()">
-      {{ $t("save") }}
-    </button>
-    <button class="light" @click="cancelIngredient()">
-      {{ $t("cancel") }}
-    </button>
-    <!-- <router-link
+    <div class="center">
+      <button class="circular secondary" @click="saveIngredient()" :disabled="!hasChange">
+        <i>check</i>
+        <!-- {{ $t("save") }} -->
+      </button>
+      <button class="circular dark" @click="cancelIngredient()">
+        <i>clear</i>
+        <!-- {{ $t("cancel") }} -->
+      </button>
+      <!-- <router-link
       :to="{ path: '/ingredients' }"
       tag="button"
       class="light"
-    >
+      >
       {{ $t("cancel") }}
     </router-link> -->
+    </div>
 
   </div>
 </template>
@@ -139,6 +143,14 @@ export default {
     },
     idNext () {
       return parseInt(this.ingredient.id) + 1
+    },
+    hasChange () { // TODO
+      const realId = this.getIngredients.findIndex(i => i.id === this.id)
+      const realIngredient = this.getIngredients[realId]
+      console.log(this.ingredient)
+      console.log(realIngredient)
+      console.log(!this.isEquivalent(this.ingredient, realIngredient))
+      return !this.isEquivalent(this.ingredient, realIngredient)
     }
   },
 
@@ -156,12 +168,25 @@ export default {
     },
     saveIngredient () {
       this.$store.commit('SET_INGREDIENT', {ingredient: this.ingredient})
+      this.$router.go(-1)
     },
     cancelIngredient () {
       if (this.mode === 'create') {
         this.$store.commit('DELETE_INGREDIENT', {ingredient: this.ingredient})
       }
       this.$router.go(-1)
+    },
+    isEquivalent (a, b) {
+      const aProps = Object.getOwnPropertyNames(a)
+      const bProps = Object.getOwnPropertyNames(b)
+      if (aProps.length !== bProps.length) { return false }
+      for (let i = 0; i < aProps.length; i++) {
+        const propName = aProps[i]
+        if (a[propName] !== b[propName]) {
+          return false
+        }
+      }
+      return true
     }
   },
 

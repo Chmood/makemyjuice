@@ -19,7 +19,7 @@ export default new VueRouter({
    * If switching back to default "hash" mode, don't forget to set the
    * build publicPath back to '' so Cordova builds work again.
    */
-  mode: 'history', // No more # in the URL
+  // mode: 'history', // No more # in the URL
 
   routes: [
     {

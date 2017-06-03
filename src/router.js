@@ -26,9 +26,12 @@ export default new VueRouter({
       path: '/', // Default route
       component: load('Index'),
       children: [ // Sub-routes
-        { path: '', component: load('pages/Home') },  // default subroute
-        { path: 'ingredients', component: load('pages/Ingredients') },
+        { path: '', component: load('pages/Recipe') },  // default subroute
+        { path: 'recipe', component: load('pages/Recipe'), props: true },
+        { path: 'recipe/:id', component: load('pages/Recipe'), props: true },
+        { path: 'recipes', component: load('pages/Recipes') },
         { path: 'ingredient/:mode/:id', component: load('pages/Ingredient'), props: true },
+        { path: 'ingredients', component: load('pages/Ingredients') },
         { path: 'settings', component: load('pages/Settings') }
       ]
     },

@@ -76,6 +76,7 @@
       }
     },
     props: [
+      'recipe'
     ],
     computed: {
       ...mapGetters([
@@ -84,29 +85,22 @@
         'getAromas',
         'getAdditives',
 
-        'getRecipeAromas',
-        'getRecipeAdditives',
-
-        'getRecipeQuantity',
-        'getRecipePGVGRatio',
-        'getRecipeNicotine',
-
         'mode',
         'favorite',
         'currency'
       ]),
       recipeIngredients () {
         // Merge aromas and additives
-        return this.getRecipeAromas.concat(this.getRecipeAdditives)
+        return this.recipe.aromas.concat(this.recipe.additives)
       },
       recipeQuantity () {
-        return this.favorite.favoriteQuantity ? this.favorite.quantity : this.getRecipeQuantity
+        return this.favorite.favoriteQuantity ? this.favorite.quantity : this.recipe.quantity
       },
       recipePGVGRatio () {
-        return this.favorite.favoritePGVGRatio ? this.favorite.PGVGRatio : this.getRecipePGVGRatio
+        return this.favorite.favoritePGVGRatio ? this.favorite.PGVGRatio : this.recipe.PGVGRatio
       },
       recipeNicotine () {
-        return this.favorite.favoriteNicotine ? this.favorite.nicotine : this.getRecipeNicotine
+        return this.favorite.favoriteNicotine ? this.favorite.nicotine : this.recipe.nicotine
       },
       results () {
         // Faisability of the recipe (considering our available ingredients)
@@ -142,7 +136,7 @@
 
         if (!this.mode.base) {
           // Substract additives from total
-          this.getRecipeAdditives.forEach(ingredient => {
+          this.recipe.additives.forEach(ingredient => {
             basesRatio -= ingredient.ratio
             additivesRatio += ingredient.ratio
           })
@@ -155,7 +149,7 @@
 
         if (!this.mode.base) {
           // Substract aromas from total
-          this.getRecipeAromas.forEach(ingredient => {
+          this.recipe.aromas.forEach(ingredient => {
             const ingredientId = this.getIngredients.findIndex(i => i.id === ingredient.id)
             const ingredientReal = this.getIngredients[ingredientId]
 

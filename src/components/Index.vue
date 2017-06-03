@@ -38,13 +38,11 @@
         <q-drawer-link icon="home" to="/">
           {{ $t("calculator") }}
         </q-drawer-link>
-        <!-- <q-drawer-link icon="mail" to="/messages">
-          Messages
-          <span class="floating label bg-primary">{{ nMessagesUnread }}</span>
-        </q-drawer-link> -->
         <q-drawer-link icon="shopping_cart" to="/ingredients">
           {{ $tc("ingredient", 2) }}
-          <!-- <span class="floating label bg-primary">{{ nMessagesUnread }}</span> -->
+        </q-drawer-link>
+        <q-drawer-link icon="assignment" to="/recipes">
+          {{ $tc("recipe", 2) }}
         </q-drawer-link>
         <q-drawer-link icon="build" to="/settings">
           {{ $tc("setting", 2) }}

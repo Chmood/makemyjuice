@@ -76,14 +76,14 @@
         <h4> {{ $tc("aroma", 2) }} </h4>
 
         <section class="input-items">
-          <RecipeIngredients type="aroma">
+          <RecipeIngredients :recipe="recipe" type="aroma">
           </RecipeIngredients>
         </section>
 
         <h4> {{ $tc("additive", 2) }} </h4>
 
         <section class="input-items">
-          <RecipeIngredients type="additive">
+          <RecipeIngredients :recipe="recipe" type="additive">
           </RecipeIngredients>
         </section>
       </template>
@@ -92,7 +92,7 @@
 
     <section>
       <h3 class="page-subtitle">{{ $tc("ingredient", 2) }}</h3>
-      <RecipeResults></RecipeResults>
+      <RecipeResults :recipe="recipe"></RecipeResults>
     </section>
 
   </div>
@@ -104,40 +104,41 @@ import RecipeIngredients from './RecipeIngredients.vue'
 import RecipeResults from './RecipeResults.vue'
 
 export default {
+  props: [
+    'recipe'
+  ],
   components: {
     RecipeIngredients,
     RecipeResults
   },
   data () {
     return {
+      getCurrentRecipeId: 0
     }
   },
   computed: {
     ...mapGetters([
-      'getRecipeName',
-      'getRecipeQuantity',
-      'getRecipePGVGRatio',
-      'getRecipeNicotine',
-
       'mode',
       'favorite'
     ]),
+
     name: {
-      get () { return this.getRecipeName },
-      set (value) { this.$store.commit('SET_RECIPE_NAME', value) }
+      get () { return this.recipe.name },
+      set (value) { this.$store.commit('SET_RECIPE_NAME', {recipe: this.recipe, value}) }
     },
     quantity: {
-      get () { return this.getRecipeQuantity },
-      set (value) { this.$store.commit('SET_RECIPE_QUANTITY', value) }
+      get () { return this.recipe.quantity },
+      set (value) { this.$store.commit('SET_RECIPE_QUANTITY', {recipe: this.recipe, value}) }
     },
     PGVGRatio: {
-      get () { return this.getRecipePGVGRatio * 100 },
-      set (value) { this.$store.commit('SET_RECIPE_PGVGRATIO', value / 100) }
+      get () { return this.recipe.PGVGRatio * 100 },
+      set (value) { this.$store.commit('SET_RECIPE_PGVGRATIO', {recipe: this.recipe, value: value / 100}) }
     },
     nicotine: {
-      get () { return this.getRecipeNicotine },
-      set (value) { this.$store.commit('SET_RECIPE_NICOTINE', value) }
+      get () { return this.recipe.nicotine },
+      set (value) { this.$store.commit('SET_RECIPE_NICOTINE', {recipe: this.recipe, value}) }
     },
+
     favoriteQuantity: {
       get () { return this.favorite.favoriteQuantity },
       set (value) { this.$store.commit('SET_FAVORITE', {favorite: 'favoriteQuantity', value: value}) }

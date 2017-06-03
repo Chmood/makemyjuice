@@ -52,7 +52,6 @@
       </div>
     </div>
 
-
   </section>
 </template>
 
@@ -60,22 +59,20 @@
   import { mapGetters, mapMutations, mapActions } from 'vuex'
 
   export default {
-    // components: { Ingredient },
+    props: [
+      'recipe',
+      'type'
+    ],
+    components: {},
     data () {
       return {
       }
     },
-    props: [
-      'type'
-    ],
     computed: {
       ...mapGetters([
         'getBases',
         'getAromas',
-        'getAdditives',
-
-        'getRecipeAromas',
-        'getRecipeAdditives'
+        'getAdditives'
       ]),
       ingredients () {
         if (this.type === 'aroma') {
@@ -87,10 +84,10 @@
       },
       recipeIngredients () {
         if (this.type === 'aroma') {
-          return this.getRecipeAromas
+          return this.recipe.aromas
         }
         else if (this.type === 'additive') {
-          return this.getRecipeAdditives
+          return this.recipe.additives
         }
       },
       ingredientChoice () {
@@ -125,18 +122,21 @@
       ]),
       addRecipeIngredient () {
         this.$store.commit('ADD_RECIPE_INGREDIENT', {
+          recipe: this.recipe,
           type: this.type,
           ingredient: {id: '0', ratio: 0.05}
         })
       },
       deleteRecipeIngredient (ingredient) {
         this.$store.commit('DELETE_RECIPE_INGREDIENT', {
+          recipe: this.recipe,
           type: this.type,
           ingredient
         })
       },
       setRecipeIngredientId (id, ingredientId) {
         this.$store.commit('SET_RECIPE_INGREDIENT_ID', {
+          recipe: this.recipe,
           type: this.type,
           id: id,
           ingredientId: ingredientId
@@ -144,6 +144,7 @@
       },
       setRecipeIngredientRatio (id, e) {
         this.$store.commit('SET_RECIPE_INGREDIENT_RATIO', {
+          recipe: this.recipe,
           type: this.type,
           id: id,
           ingredientRatio: parseFloat(e.target.value) / 100

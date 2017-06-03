@@ -36,7 +36,7 @@
           </div>
           <div class="input-item__input">
             <template v-if="favoritePGVGRatio">
-              <input v-model.number="favorite.PGVGRatio" type="number" disabled="true">
+              <input :value="Math.round(favorite.PGVGRatio * 100)" type="number" disabled="true">
             </template>
             <template v-else>
               <input v-model.number="PGVGRatio" type="number">

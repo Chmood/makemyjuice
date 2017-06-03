@@ -453,6 +453,7 @@
 
     > * {
       // border: 2px solid red
+      transition: all 0.4s;
     }
   }
 

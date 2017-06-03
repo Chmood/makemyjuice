@@ -24,7 +24,7 @@
         <tr v-for="(result, index) in results" :key="index">
           <td>
             <router-link
-              :to="{ path: '/ingredient/' + result.id }"
+              :to="{ path: '/ingredient/edit/' + result.id }"
               tag="button"
               class="circular small"
               v-bind:style="{ backgroundColor: result.color, color: 'white'}"

@@ -5,6 +5,13 @@
 
       <h3 class="page-subtitle">{{ $tc("recipe", 1) }}</h3>
 
+      <button class="circular dark small"
+        :style="{color: recipe.starred ? 'gold' : 'white'}"
+        @click="$store.commit('TOGGLE_RECIPE_STAR', recipe)"
+      >
+        <i>star</i>
+      </button>
+
       <input v-model="name" class="full-width recipe-input-name">
 
       <h4> {{ $tc("base", 1) }} </h4>

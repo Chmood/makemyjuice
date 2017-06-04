@@ -2,7 +2,6 @@
 
 ## Bugs
 
-* ingredient edition: save btn works but doesn't redirect
 * calculator: favorite PG/VG ratio seems broken???
 * desactivated/deleted ingredients put calculator in error
 * custom currency mode

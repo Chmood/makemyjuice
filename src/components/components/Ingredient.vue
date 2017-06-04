@@ -14,10 +14,10 @@
     <div class="ingredient-item-description">{{ ingredient.description }}</div>
 
     <div class="ingredient-item-stats">
-      <div v-if="ingredient.PGVGRatio" class="ingredient-item-stat">
+      <div v-if="ingredient.type !== 'additive'" class="ingredient-item-stat">
         <span>{{ $t("PGVGRatio") }}</span><span><span>{{ Math.round(ingredient.PGVGRatio * 100) }}/{{ Math.round((1 - ingredient.PGVGRatio) * 100) }}</span>&nbsp;%</span>
       </div>
-      <div v-if="ingredient.nicotine" class="ingredient-item-stat">
+      <div v-if="ingredient.nicotine && mode.nicotine" class="ingredient-item-stat">
         <span>{{ $t("nicotine") }}</span><span><span>{{ ingredient.nicotine }}</span>&nbsp;mg/mL</span>
       </div>
       <div v-if="ingredient.price && mode.price" class="ingredient-item-stat">

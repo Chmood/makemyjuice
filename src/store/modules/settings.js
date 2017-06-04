@@ -13,11 +13,11 @@ const state = {
     favorite: false
   },
   favorite: {
-    quantity: 50,
+    quantity: 100,
     favoriteQuantity: false,
-    PGVGRatio: 0.5,
+    PGVGRatio: 0.4,
     favoritePGVGRatio: false,
-    nicotine: 6,
+    nicotine: 8,
     favoriteNicotine: false
   }
 }

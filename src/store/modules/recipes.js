@@ -6,6 +6,7 @@ const state = {
   recipes: [
     {
       id: '0',
+      starred: true,
       name: 'My Recipe',
       quantity: 50,
       PGVGRatio: 0.5,
@@ -20,6 +21,7 @@ const state = {
     },
     {
       id: '2',
+      starred: false,
       name: 'My Recipe #2',
       quantity: 50,
       PGVGRatio: 0.5,
@@ -86,6 +88,9 @@ const mutations = {
     else if (type === 'additive') {
       recipe.additives[id].ratio = parseFloat(ingredientRatio)
     }
+  },
+  [types.TOGGLE_RECIPE_STAR] (state, recipe) {
+    recipe.starred = !recipe.starred
   }
 }
 

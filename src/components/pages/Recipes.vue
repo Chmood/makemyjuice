@@ -47,6 +47,13 @@
 
     </div>
 
+    <div class="center bottom-btns">
+      <button class="circular primary small" @click="newRecipe()">
+        <i>add</i>
+      </button>
+    </div>
+
+
   </div>
 </template>
 
@@ -81,6 +88,31 @@ export default {
       const ingredientReal = this.getIngredients[ingredientId]
       return ingredientReal
     },
+    getFreeId () {
+      let id = 1
+      while (this.getRecipes.findIndex(i => i.id === id.toString()) !== -1) {
+        id++
+      }
+      return id.toString()
+    },
+    newRecipe () {
+      const id = this.getFreeId()
+      const recipe = {
+        id: id,
+        starred: false,
+        name: 'My New Recipe #' + id,
+        description: 'Yet another recipe!',
+        quantity: 100,
+        PGVGRatio: 0.5,
+        nicotine: 6,
+        aromas: [
+        ],
+        additives: [
+        ]
+      }
+      this.$store.commit('ADD_RECIPE', recipe)
+      this.$router.push('recipe/' + id)
+    },
     confirmDelete (recipe) {
       Dialog.create({
         title: 'Delete this recipe?',
@@ -112,6 +144,7 @@ export default {
 
   .item-list {
     background-color: white;
+    margin-bottom: $gutter;
   }
 
   .item-list__item {

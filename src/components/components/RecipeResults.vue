@@ -134,7 +134,7 @@
         // ADDITIVES
         console.log('ADDITIVES---------------------------------')
 
-        if (!this.mode.base) {
+        if (!this.mode.base && this.recipe.additives.length > 0) {
           // Substract additives from total
           this.recipe.additives.forEach(ingredient => {
             basesRatio -= ingredient.ratio
@@ -147,7 +147,7 @@
         // AROMAS
         console.log('AROMAS------------------------------------')
 
-        if (!this.mode.base) {
+        if (!this.mode.base && this.recipe.aromas.length > 0) {
           // Substract aromas from total
           this.recipe.aromas.forEach(ingredient => {
             const ingredientId = this.getIngredients.findIndex(i => i.id === ingredient.id)
@@ -241,7 +241,7 @@
         // Compute the PG/VG ratio of what we have now
         const submixQuantity = aromasQuantity + quantityBaseNicotine
         let submixPGVGRatio
-        if (this.mode.nicotine && !this.mode.base) { // nicotine + aromas
+        if (this.mode.nicotine && !this.mode.base && this.recipe.aromas.length > 0) { // nicotine + aromas + HACKY not empty aromas check!
           submixPGVGRatio = ((aromasQuantity * aromasPGVGRatio) + (quantityBaseNicotine * this.getBases[baseNicotineId].PGVGRatio)) / submixQuantity
         }
         else {

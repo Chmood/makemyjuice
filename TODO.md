@@ -10,9 +10,9 @@
 
 ## Features
 
-* add recipe description (and tags later, for ingredients too)
+* add categories and tags for recipes and ingredients
 * manual flush of store/storage/user datas
-* allow the user to save his recipes (+ import/export)
+* allow the user import/export his data
 
 ## Formula
 

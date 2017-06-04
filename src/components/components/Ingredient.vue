@@ -80,7 +80,7 @@
       confirmDelete (ingredient) {
         Dialog.create({
           title: 'Delete this ingredient?',
-          ingredient: 'Are you sure? This can\'t be reverted!',
+          ingredient: this.$t('areYouSure'),
           buttons: [
             {
               label: this.$t('cancel'),

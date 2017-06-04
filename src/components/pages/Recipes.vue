@@ -105,10 +105,8 @@ export default {
         quantity: 100,
         PGVGRatio: 0.5,
         nicotine: 6,
-        aromas: [
-        ],
-        additives: [
-        ]
+        aromas: [],
+        additives: []
       }
       this.$store.commit('ADD_RECIPE', recipe)
       this.$router.push('recipe/' + id)
@@ -116,7 +114,7 @@ export default {
     confirmDelete (recipe) {
       Dialog.create({
         title: 'Delete this recipe?',
-        message: 'Are you sure? This can\'t be reverted!',
+        message: this.$t('areYouSure'),
         buttons: [
           {
             label: this.$t('cancel'),

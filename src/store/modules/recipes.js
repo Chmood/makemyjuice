@@ -1,30 +1,53 @@
 import * as types from '../mutation-types'
 
+const recipesDemo = [
+  {
+    id: '0',
+    starred: true,
+    name: 'My Recipe',
+    description: 'My first recipe',
+    quantity: 50,
+    PGVGRatio: 0.5,
+    nicotine: 6,
+    aromas: [
+      {id: '2', ratio: 0.05},
+      {id: '3', ratio: 0.02}
+    ],
+    additives: [
+      {id: '4', ratio: 0.01}
+    ]
+  }
+]
+
 // Initial state
 const state = {
   currentRecipeId: '0',
-  recipes: [
-    {
-      id: '0',
-      starred: true,
-      name: 'My Recipe',
-      description: 'My first recipe',
-      quantity: 50,
-      PGVGRatio: 0.5,
-      nicotine: 6,
-      aromas: [
-        {id: '2', ratio: 0.05},
-        {id: '3', ratio: 0.02}
-      ],
-      additives: [
-        {id: '4', ratio: 0.01}
-      ]
-    }
-  ]
+  recipes: Object.assign({}, recipesDemo)
 }
 
 // Mutations
 const mutations = {
+  [types.CLEAR_RECIPES] (state) {
+    // We need at least one recipe
+    state.currentRecipeId = '0'
+    state.recipes = [
+      {
+        id: '0',
+        starred: false,
+        name: 'My First Recipe #0',
+        description: 'Let get mixed!',
+        quantity: 100,
+        PGVGRatio: 0.5,
+        nicotine: 6,
+        aromas: [],
+        additives: []
+      }
+    ]
+  },
+  [types.RESET_RECIPES] (state) {
+    state.currentRecipeId = '0'
+    state.recipes = recipesDemo
+  },
   [types.ADD_RECIPE] (state, recipe) {
     state.recipes.push(recipe)
   },

@@ -1,7 +1,7 @@
 import * as types from '../mutation-types'
 
-// Initial state
-const state = {
+// Default state
+const stateDefault = {
   language: 'en',
   currency: '$',
   mode: {
@@ -22,8 +22,17 @@ const state = {
   }
 }
 
+// Initial state
+const state = Object.assign({}, stateDefault)
+
 // Mutations
 const mutations = {
+  [types.RESET_SETTINGS] (state) {
+    state.language = stateDefault.language
+    state.currency = stateDefault.currency
+    state.mode = stateDefault.mode
+    state.favorite = stateDefault.favorite
+  },
   [types.SET_LANGUAGE] (state, lang) { state.language = lang },
   [types.SET_CURRENCY] (state, currency) { state.currency = currency },
   [types.SET_MODE] (state, {mode, isActive}) { state.mode[mode] = isActive },

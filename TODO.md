@@ -11,7 +11,6 @@
 ## Features
 
 * add categories and tags for recipes and ingredients
-* manual flush of store/storage/user datas
 * allow the user import/export his data
 
 ## Formula

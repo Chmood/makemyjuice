@@ -130,11 +130,81 @@
       </template>
     </div>
 
+    <h3>User data</h3>
+
+    <div class="list">
+
+      <div class="list-label">
+        {{ $tc("setting", 2) }}
+      </div>
+
+      <label class="item two-lines">
+        <div class="item-content has-secondary">
+          <div>{{ $t("resetSettings") }}</div>
+          <div>{{ $t("resetSettingsDesc") }}</div>
+        </div>
+        <div class="item-secondary">
+          <button class="circular red small" @click="confirmDelete('RESET_SETTINGS', $t('resetSettingsConfirm'), $t('resetSettingsConfirmed'))"><i>refresh</i></button>
+        </div>
+      </label>
+
+      <div class="list-label">
+        {{ getIngredients.length }}
+        {{ $tc("ingredient", getIngredients.length) }}
+      </div>
+
+      <label class="item two-lines">
+        <div class="item-content has-secondary">
+          <div>{{ $t("clearIngredients") }}</div>
+          <div>{{ $t("clearIngredientsDesc") }}</div>
+        </div>
+        <div class="item-secondary">
+          <button class="circular red small" @click="confirmDelete('CLEAR_INGREDIENTS', $t('clearIngredientsConfirm'), $t('clearIngredientsConfirmed'))"><i>delete</i></button>
+        </div>
+      </label>
+
+      <label class="item two-lines">
+        <div class="item-content has-secondary">
+          <div>{{ $t("resetIngredients") }}</div>
+          <div>{{ $t("resetIngredientsDesc") }}</div>
+        </div>
+        <div class="item-secondary">
+          <button class="circular red small" @click="confirmDelete('RESET_INGREDIENTS', $t('resetIngredientsConfirm'), $t('resetIngredientsConfirmed'))"><i>refresh</i></button>
+        </div>
+      </label>
+
+      <div class="list-label">
+        {{ getRecipes.length }}
+        {{ $tc("recipe", getRecipes.length) }}
+      </div>
+
+      <label class="item two-lines">
+        <div class="item-content has-secondary">
+          <div>{{ $t("clearRecipes") }}</div>
+          <div>{{ $t("clearRecipesDesc") }}</div>
+        </div>
+        <div class="item-secondary">
+          <button class="circular red small" @click="confirmDelete('CLEAR_RECIPES', $t('clearRecipesConfirm'), $t('clearRecipesConfirmed'))"><i>delete</i></button>
+        </div>
+      </label>
+      <label class="item two-lines">
+        <div class="item-content has-secondary">
+          <div>{{ $t("resetRecipes") }}</div>
+          <div>{{ $t("resetRecipesDesc") }}</div>
+        </div>
+        <div class="item-secondary">
+          <button class="circular red small" @click="confirmDelete('RESET_RECIPES', $t('resetRecipesConfirm'), $t('resetRecipesConfirmed'))"><i>refresh</i></button>
+        </div>
+      </label>
+
+    </div>
+
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { Dialog, Toast } from 'quasar'
 
 export default {
   components: {
@@ -155,7 +225,10 @@ export default {
       'language',
       'currency',
       'mode',
-      'favorite'
+      'favorite',
+
+      'getIngredients',
+      'getRecipes'
     ]),
     locale: {
       get () { return this.language },
@@ -230,7 +303,26 @@ export default {
     ...mapActions([
     ]),
     ...mapMutations([
-    ])
+    ]),
+    confirmDelete (mutation, title, confirm) {
+      Dialog.create({
+        title: title,
+        message: this.$t('areYouSure'),
+        buttons: [
+          {
+            label: this.$t('cancel'),
+            handler () {}
+          },
+          {
+            label: this.$t('confirm'),
+            handler: () => {
+              Toast.create.positive(confirm)
+              this.$store.commit(mutation)
+            }
+          }
+        ]
+      })
+    }
   }
 }
 </script>

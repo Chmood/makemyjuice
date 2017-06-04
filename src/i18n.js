@@ -43,7 +43,35 @@ export default {
     desactivate: 'desactivate',
     add: 'add',
     edit: 'edit',
-    save: 'save'
+    save: 'save',
+    confirm: 'confirm',
+
+    areYouSure: 'Are you sure? This can\'be reverted!',
+
+    resetSettings: 'Reset settings',
+    resetSettingsDesc: 'Reset the default application settings',
+    resetSettingsConfirm: 'Reset settings?',
+    resetSettingsConfirmed: 'Settings have been reset',
+
+    clearIngredients: 'Clear ingredients',
+    clearIngredientsDesc: 'Empty the ingredient list totaly',
+    clearIngredientsConfirm: 'Clear all ingredients?',
+    clearIngredientsConfirmed: 'All ingredients have been deleted',
+
+    resetIngredients: 'Reset ingredients',
+    resetIngredientsDesc: 'Reset ingredient list with demo content',
+    resetIngredientsConfirm: 'Reset ingredients?',
+    resetIngredientsConfirmed: 'Ingredients have been reseted',
+
+    clearRecipes: 'Clear recipes',
+    clearRecipesDesc: 'Empty the recipe list totaly',
+    clearRecipesConfirm: 'Clear all recipes?',
+    clearRecipesConfirmed: 'All recipes have been deleted',
+
+    resetRecipes: 'Reset recipes',
+    resetRecipesDesc: 'Reset recipe list with demo content',
+    resetRecipesConfirm: 'Reset recipes?',
+    resetRecipesConfirmed: 'Recipes have been reseted'
   },
 
   fr: {
@@ -90,6 +118,34 @@ export default {
     desactivate: 'désactiver',
     add: 'ajouter',
     edit: 'modifier',
-    save: 'sauver'
+    save: 'sauver',
+    confirm: 'confirmer',
+
+    areYouSure: 'Êtes-vous sur? Ceci ne pourra être annulé !',
+
+    resetSettings: 'Ré-initialiser les paramètres',
+    resetSettingsDesc: 'Ré-initialiser l\'application avec les paramètres par défaut',
+    resetSettingsConfirm: 'Ré-initialiser les paramètres ?',
+    resetSettingsConfirmed: 'Les paramètres ont été ré-initialisés',
+
+    clearIngredients: 'Supprimer tous les ingrédients',
+    clearIngredientsDesc: 'Vide complètement la liste d\'ingrédients',
+    clearIngredientsConfirm: 'Supprimer tous les ingrédients ?',
+    clearIngredientsConfirmed: 'Tous les ingrédients ont été supprimés',
+
+    resetIngredients: 'Ré-initialiser les ingrédients',
+    resetIngredientsDesc: 'Ré-initialise la liste d\'ingrédients avec le contenu de démo',
+    resetIngredientsConfirm: 'Ré-initialiser les ingrédients ?',
+    resetIngredientsConfirmed: 'Les ingrédients ont été ré-initialisés',
+
+    clearRecipes: 'Supprimer tous les recettes',
+    clearRecipesDesc: 'Vide complètement la liste de recettes',
+    clearRecipesConfirm: 'Supprimer tous les recettes ?',
+    clearRecipesConfirmed: 'Tous les recettes ont été supprimés',
+
+    resetRecipes: 'Ré-initialiser les recettes',
+    resetRecipesDesc: 'Ré-initialise la liste de recettes avec le contenu de démo',
+    resetRecipesConfirm: 'Ré-initialiser les recettes ?',
+    resetRecipesConfirmed: 'Les recettes ont été ré-initialisés'
   }
 }

@@ -8,6 +8,7 @@ const state = {
       id: '0',
       starred: true,
       name: 'My Recipe',
+      description: 'My first recipe',
       quantity: 50,
       PGVGRatio: 0.5,
       nicotine: 6,
@@ -17,19 +18,6 @@ const state = {
       ],
       additives: [
         {id: '4', ratio: 0.01}
-      ]
-    },
-    {
-      id: '2',
-      starred: false,
-      name: 'My Recipe #2',
-      quantity: 50,
-      PGVGRatio: 0.5,
-      nicotine: 6,
-      aromas: [
-        {id: '3', ratio: 0.02}
-      ],
-      additives: [
       ]
     }
   ]
@@ -48,6 +36,9 @@ const mutations = {
   },
   [types.SET_RECIPE_NAME] (state, {recipe, value}) {
     recipe.name = value
+  },
+  [types.SET_RECIPE_DESCRIPTION] (state, {recipe, value}) {
+    recipe.description = value
   },
   [types.SET_RECIPE_QUANTITY] (state, {recipe, value}) {
     recipe.quantity = parseFloat(value)

@@ -20,7 +20,7 @@
 
         <div class="flex-item--grow">
           <div class="recipe-name">{{ recipe.name }}</div>
-          <div class="recipe-description">[[ recipe.description recipe.description recipe.description ]]</div>
+          <div class="recipe-description">{{ recipe.description }}</div>
           <div class="recipe-aromas">
             <div
               v-for="(aroma, aromaIndex) in recipe.aromas"

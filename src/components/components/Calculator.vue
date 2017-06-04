@@ -5,14 +5,20 @@
 
       <h3 class="page-subtitle">{{ $tc("recipe", 1) }}</h3>
 
-      <button class="circular dark small"
-        :style="{color: recipe.starred ? 'gold' : 'white'}"
-        @click="$store.commit('TOGGLE_RECIPE_STAR', recipe)"
-      >
-        <i>star</i>
-      </button>
+      <section class="input-items">
 
-      <input v-model="name" class="full-width recipe-input-name">
+        <button class="circular dark small"
+          :style="{color: recipe.starred ? 'gold' : 'white'}"
+          @click="$store.commit('TOGGLE_RECIPE_STAR', recipe)"
+        >
+          <i>star</i>
+        </button>
+
+        <input v-model="name" class="full-width recipe-input-name">
+
+        <input v-model="description" class="full-width recipe-input-description">
+
+      </section>
 
       <h4> {{ $tc("base", 1) }} </h4>
 
@@ -133,6 +139,10 @@ export default {
       get () { return this.recipe.name },
       set (value) { this.$store.commit('SET_RECIPE_NAME', {recipe: this.recipe, value}) }
     },
+    description: {
+      get () { return this.recipe.description },
+      set (value) { this.$store.commit('SET_RECIPE_DESCRIPTION', {recipe: this.recipe, value}) }
+    },
     quantity: {
       get () { return this.recipe.quantity },
       set (value) { this.$store.commit('SET_RECIPE_QUANTITY', {recipe: this.recipe, value}) }
@@ -188,8 +198,14 @@ export default {
   }
 
   .recipe-input-name {
-    color: white;
+    margin-bottom: $gutter-half;
+    color: #333;
     font-size: 1.5rem;
+  }
+  .recipe-input-description {
+    color: #888;
+    font-size: 1.2rem;
+    font-style: italic;
   }
 
   .results {

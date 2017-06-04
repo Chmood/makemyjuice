@@ -3,6 +3,12 @@ export default {
     LANG: 'english',
     hello: 'hellooo',
     language: 'language',
+    currency: 'currency',
+
+    localisation: 'localisation',
+    mode: 'mode | modes',
+    favoriteRecipeParameters: 'favorite recipe parameters',
+    userDatas: 'user datas',
 
     menu: 'menu',
     calculator: 'calculator',
@@ -46,6 +52,19 @@ export default {
     save: 'save',
     confirm: 'confirm',
 
+    nicotineMode: 'Nicotine mode',
+    nicotineModeDesc: 'Use nicotine in calculator',
+    baseMode: 'Base mode',
+    baseModeDesc: 'Don\'t use aromas or additives',
+    priceMode: 'Price mode',
+    priceModeDesc: 'Show recipe and ingredients price',
+    dropMode: 'Drop mode',
+    dropModeDesc: 'Express small amounts in drop unit',
+    beakerMode: 'Beaker mode',
+    beakerModeDesc: 'Draw the beaker',
+    favoriteMode: 'Favorite mode',
+    favoriteModeDesc: 'Use favorite settings',
+
     areYouSure: 'Are you sure? This can\'be reverted!',
 
     resetSettings: 'Reset settings',
@@ -78,6 +97,12 @@ export default {
     LANG: 'français',
     hello: 'coucou',
     language: 'langue',
+    currency: 'devise',
+
+    localisation: 'localisation',
+    mode: 'mode | modes',
+    favoriteRecipeParameters: 'paramètres de recette favoris',
+    userDatas: 'données utilisateur',
 
     menu: 'menu',
     calculator: 'calculateur',
@@ -120,6 +145,19 @@ export default {
     edit: 'modifier',
     save: 'sauver',
     confirm: 'confirmer',
+
+    nicotineMode: 'Mode Nicotine',
+    nicotineModeDesc: 'Utiliser la nicotine dans le calculateur',
+    baseMode: 'Mode Base',
+    baseModeDesc: 'Ne pas utiliser d\'aromes ou d\'additifs',
+    priceMode: 'Mode Prix',
+    priceModeDesc: 'Afficher le prix des recettes et des ingrédients',
+    dropMode: 'Mode Goutte',
+    dropModeDesc: 'Les petites quantités sont exprimées en gouttes',
+    beakerMode: 'Mode Bécher',
+    beakerModeDesc: 'Afficher le bécher',
+    favoriteMode: 'Mode Favoris',
+    favoriteModeDesc: 'Utiliser les paramètres favoris',
 
     areYouSure: 'Êtes-vous sur? Ceci ne pourra être annulé !',
 

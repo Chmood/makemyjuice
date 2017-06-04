@@ -3,10 +3,10 @@
 
     <h2 class="page-title">{{ $tc("setting", 2) }}</h2>
 
-    <h3>Localisation</h3>
+    <h3>{{ $t("localisation") }}</h3>
 
     <div class="list">
-      <div class="list-label">Language</div>
+      <div class="list-label">{{ $t("language") }}</div>
       <label class="item multiple-lines">
         <i class="item-primary">public</i>
         <div class="item-content">
@@ -19,7 +19,7 @@
         </div>
       </label>
 
-      <div class="list-label">Currency</div>
+      <div class="list-label">{{ $t("currency") }}</div>
       <label class="item multiple-lines">
         <i class="item-primary">euro_symbol</i>
         <div class="item-content">
@@ -39,14 +39,14 @@
       </label>
     </div>
 
-    <h3>Modes</h3>
+    <h3>{{ $tc("mode", 2) }}</h3>
 
     <div class="list">
       <!-- <div class="list-label">Calculator modes</div> -->
       <label class="item two-lines">
         <div class="item-content has-secondary">
-          <div>Nicotine mode</div>
-          <div>Use nicotine in calculator</div>
+          <div>{{ $t("nicotineMode") }}</div>
+          <div>{{ $t("nicotineModeDesc") }}</div>
         </div>
         <div class="item-secondary">
           <q-toggle v-model="modeNicotine" class="primary"></q-toggle>
@@ -54,8 +54,8 @@
       </label>
       <label class="item two-lines">
         <div class="item-content has-secondary">
-          <div>Base mode</div>
-          <div>Don't use aromas or additives</div>
+          <div>{{ $t("baseMode") }}</div>
+          <div>{{ $t("baseModeDesc") }}</div>
         </div>
         <div class="item-secondary">
           <q-toggle v-model="modeBase" class="primary"></q-toggle>
@@ -63,8 +63,8 @@
       </label>
       <label class="item two-lines">
         <div class="item-content has-secondary">
-          <div>Price mode</div>
-          <div>Show recipe and ingredients price</div>
+          <div>{{ $t("priceMode") }}</div>
+          <div>{{ $t("priceModeDesc") }}</div>
         </div>
         <div class="item-secondary">
           <q-toggle v-model="modePrice" class="primary"></q-toggle>
@@ -72,8 +72,8 @@
       </label>
       <label class="item two-lines">
         <div class="item-content has-secondary">
-          <div>Drop mode</div>
-          <div>Express small quantities in drops</div>
+          <div>{{ $t("dropMode") }}</div>
+          <div>{{ $t("dropModeDesc") }}</div>
         </div>
         <div class="item-secondary">
           <q-toggle v-model="modeDrop" class="primary"></q-toggle>
@@ -81,8 +81,8 @@
       </label>
       <label class="item two-lines">
         <div class="item-content has-secondary">
-          <div>Beaker mode</div>
-          <div>Draw the beaker</div>
+          <div>{{ $t("beakerMode") }}</div>
+          <div>{{ $t("beakerModeDesc") }}</div>
         </div>
         <div class="item-secondary">
           <q-toggle v-model="modeBeaker" class="primary"></q-toggle>
@@ -90,20 +90,20 @@
       </label>
     </div>
 
-    <h3>Favourite recipe parameters</h3>
+    <h3>{{ $t("favoriteRecipeParameters") }}</h3>
 
     <div class="list">
       <label class="item two-lines">
         <div class="item-content has-secondary">
-          <div>Favorite mode</div>
-          <div>Use favorite settings</div>
+          <div>{{ $t("favoriteMode") }}</div>
+          <div>{{ $t("favoriteModeDesc") }}</div>
         </div>
         <div class="item-secondary">
           <q-toggle v-model="modeFavorite" class="primary"></q-toggle>
         </div>
       </label>
       <template v-if="mode.favorite">
-        <div class="list-label">Quantity</div>
+        <div class="list-label">{{ $t("quantity") }}</div>
         <label class="item two-lines">
           <i class="item-primary">opacity</i>
           <div class="item-content has-secondary">
@@ -111,7 +111,7 @@
           </div>
           <div class="item-secondary">mL</div>
         </label>
-        <div class="list-label">PG/VG ratio</div>
+        <div class="list-label">{{ $t("PGVGRatio") }}</div>
         <label class="item two-lines">
           <i class="item-primary">iso</i>
           <div class="item-content has-secondary">
@@ -119,7 +119,7 @@
           </div>
           <div class="item-secondary">%</div>
         </label>
-        <div class="list-label">Nicotine</div>
+        <div class="list-label">{{ $t("nicotine") }}</div>
         <label class="item two-lines">
           <i class="item-primary">smoking_rooms</i>
           <div class="item-content has-secondary">
@@ -130,7 +130,7 @@
       </template>
     </div>
 
-    <h3>User data</h3>
+    <h3>{{ $t("userDatas") }}</h3>
 
     <div class="list">
 

@@ -37,6 +37,9 @@ const state = {
 
 // Mutations
 const mutations = {
+  [types.DELETE_RECIPE] (state, recipe) {
+    state.recipes.splice(state.recipes.indexOf(recipe), 1)
+  },
   [types.SET_CURRENT_RECIPE_ID] (state, value) {
     state.currentRecipeId = value
   },

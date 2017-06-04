@@ -41,7 +41,7 @@
             <!-- {{ index + 1 }} -->
             <i>edit</i>
           </router-link>
-          <button class="circular light small"><i>clear</i></button>
+          <button class="circular light small" @click="confirmDelete(recipe)"><i>clear</i></button>
         </div>
       </article>
 
@@ -52,6 +52,7 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { Dialog, Toast } from 'quasar'
 
 export default {
   components: {
@@ -79,6 +80,27 @@ export default {
       const ingredientId = this.getIngredients.findIndex(i => i.id === id)
       const ingredientReal = this.getIngredients[ingredientId]
       return ingredientReal
+    },
+    confirmDelete (recipe) {
+      Dialog.create({
+        title: 'Delete this recipe?',
+        message: 'Are you sure? This can\'t be reverted!',
+        buttons: [
+          {
+            label: this.$t('cancel'),
+            handler () {
+              console.log('Recipe deletion cancelled')
+            }
+          },
+          {
+            label: this.$t('delete'),
+            handler: () => {
+              Toast.create.positive(`Recipe has been deleted`)
+              this.$store.commit('DELETE_RECIPE', { recipe })
+            }
+          }
+        ]
+      })
     }
   }
 }

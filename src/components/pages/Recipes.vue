@@ -84,6 +84,7 @@ export default {
     ...mapMutations([
     ]),
     getIngredientById (id) {
+      console.log('this.getIngredients', this.getIngredients)
       const ingredientId = this.getIngredients.findIndex(i => i.id === id)
       const ingredientReal = this.getIngredients[ingredientId]
       return ingredientReal

@@ -22,7 +22,7 @@ const recipesDemo = [
 // Initial state
 const state = {
   currentRecipeId: '0',
-  recipes: Object.assign({}, recipesDemo)
+  recipes: recipesDemo
 }
 
 // Mutations
@@ -52,6 +52,10 @@ const mutations = {
     state.recipes.push(recipe)
   },
   [types.DELETE_RECIPE] (state, recipe) {
+    const id = recipe.id
+    if (state.currentRecipeId === id) {
+      state.currentRecipeId = '0'
+    }
     state.recipes.splice(state.recipes.indexOf(recipe), 1)
   },
   [types.SET_CURRENT_RECIPE_ID] (state, value) {

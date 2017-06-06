@@ -14,7 +14,7 @@ const ingredientsDemo = [
 
 // Initial state
 const state = {
-  ingredients: Object.assign({}, ingredientsDemo)
+  ingredients: ingredientsDemo
 }
 
 // Mutations

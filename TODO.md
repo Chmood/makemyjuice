@@ -2,6 +2,7 @@
 
 ## Bugs
 
+* calculator: newly added ingredients won't show up correctly in recipe select's
 * calculator: favorite PG/VG ratio seems broken???
 * desactivated/deleted ingredients put calculator in error
 * custom currency mode

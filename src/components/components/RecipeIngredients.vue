@@ -11,6 +11,7 @@
           type="list"
           :value="ingredient.id" @input="setRecipeIngredientId(index, $event)"
           :options="ingredientChoice"
+          :style="{backgroundColor: getIngredientById(ingredient.id).color}"
         ></q-select>
       </div>
       <div class="input-item__input">
@@ -72,7 +73,8 @@
       ...mapGetters([
         'getBases',
         'getAromas',
-        'getAdditives'
+        'getAdditives',
+        'getIngredients'
       ]),
       ingredients () {
         if (this.type === 'aroma') {
@@ -149,6 +151,11 @@
           id: id,
           ingredientRatio: parseFloat(e.target.value) / 100
         })
+      },
+      getIngredientById (id) {
+        const ingredientId = this.getIngredients.findIndex(i => i.id === id)
+        const ingredientReal = this.getIngredients[ingredientId]
+        return ingredientReal
       }
     }
   }

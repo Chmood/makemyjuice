@@ -7,7 +7,12 @@
       class="input-item"
     >
       <div class="input-item__label">
-        <q-select
+        <!-- <mmjSelect
+          :value="ingredient.id" @input="setRecipeIngredientId(index, $event)"
+          :options="ingredientChoice"
+        >
+        </mmjSelect> -->
+        <q-select class="q-select"
           type="list"
           :value="ingredient.id" @input="setRecipeIngredientId(index, $event)"
           :options="ingredientChoice"
@@ -58,13 +63,16 @@
 
 <script>
   import { mapGetters, mapMutations, mapActions } from 'vuex'
+  import mmjSelect from '../elements/mmj-select.vue'
 
   export default {
     props: [
       'recipe',
       'type'
     ],
-    components: {},
+    components: {
+      mmjSelect
+    },
     data () {
       return {
       }
@@ -163,6 +171,11 @@
 
 <style lang="scss" scoped>
 
-  @import "../styles/main";
+@import "../styles/main";
+
+.q-select {
+  padding-left: $gutter-half;
+  color: white;
+}
 
 </style>

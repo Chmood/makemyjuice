@@ -1,17 +1,15 @@
 <template>
 
   <section class="results">
-    <div class="beaker" v-if="mode.beaker">
-      <div
-      v-for="(result, index) in results"
-      :key="index"
-      v-bind:style="{ backgroundColor: result.color, flexBasis: result.ratio * 100 + '%' }"
-      >
-      </div>
-    </div>
+
+    <Beaker
+       v-if="mode.beaker"
+      :results="results"
+    >
+    </Beaker>
 
     <table class="results-list" v-if="results.length">
-      <!-- <thead>
+      <thead>
         <tr>
           <th>#</th>
           <th>{{ $t("name") }}</th>
@@ -19,7 +17,7 @@
           <th>{{ $t("quantity") }}</th>
           <th v-if="mode.price">{{ $t("price") }}</th>
         </tr>
-      </thead> -->
+      </thead>
       <tbody>
         <tr v-for="(result, index) in results" :key="index">
           <td>
@@ -32,7 +30,7 @@
               {{ index + 1 }}
             </router-link>
           </td>
-          <td>{{ result.name }} (ID:{{ result.id }})</td>
+          <td>{{ result.name }}</td>
           <td>{{ roundNumber(result.ratio * 100) }}%</td>
           <td v-if="result.quantity < 1 && mode.drop">
             {{ roundNumber(result.quantity * result.viscosity) }} {{ $tc("drop", 2) }}
@@ -53,7 +51,7 @@
           <td>{{ roundNumber(totalQuantity) }}mL</td>
           <td v-if="mode.price">
             {{ roundNumber(totalPrice, 2) }}{{ currency }}<br>
-            ({{ roundNumber(totalPrice * 1000 / totalQuantity, 2) }}{{ currency }}/L)
+            ({{ roundNumber(totalPrice * 1000 / totalQuantity) }}{{ currency }}/L)
           </td>
         </tr>
       </tfoot>
@@ -68,9 +66,10 @@
 
 <script>
   import { mapGetters, mapMutations, mapActions } from 'vuex'
+  import Beaker from './Beaker.vue'
 
   export default {
-    // components: { Ingredient },
+    components: { Beaker },
     data () {
       return {
       }
@@ -428,36 +427,13 @@
     }
   }
 
-  .beaker {
-    margin: $gutter;
-    display: flex;
-    flex-direction: column;
-
-    box-shadow: 0 4px 0 4px #666;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    overflow: hidden;
-    height: 20rem;
-
-    @media (min-width: 40em) {
-      height: auto;
-      flex-basis: 10%;
-      margin-left: 0;
-    }
-
-    > * {
-      // border: 2px solid red
-      transition: all 0.4s;
-    }
-  }
-
   .results-list {
-    width: 100%;
+    max-width: 100%;
+    // width: 100%;
     font-size: 0.9rem;
 
     @media (min-width: 40em) {
-      width: 90%;
-      // flex-basis: 80%;
+      flex-grow: 1;
     }
 
     td, th {
